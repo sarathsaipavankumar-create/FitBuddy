@@ -10,6 +10,8 @@ target/
 *.war
 *.ear
 *.nar
+.build-tools/
+.apk-build/
 
 # Local Configuration & Sensitive Credentials
 # NEVER commit database passwords, API keys, or private tokens
