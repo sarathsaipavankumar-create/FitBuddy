@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sign in to your FitBuddy account to access personalized home workouts and track daily streaks.">
+  <title>Login — FitBuddy</title>
+
+  <!-- Google Fonts: Manrope (Headings) and Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core CSS Stylesheets (Relative paths from /pages/) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. Header with Brand & Return Navigation
+       ========================================================================= -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="../index.html" class="brand" aria-label="FitBuddy Home">
+        <span class="brand-symbol">⚡</span>
+        <span>FitBuddy</span>
+      </a>
+
+      <div>
+        <a href="../index.html" class="btn btn-ghost btn-sm">← Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. Centered Login Card with Subtle Fitness Visual
+       ========================================================================= -->
+  <main class="auth-wrapper">
+    <div class="auth-container">
+      
+      <div class="auth-card">
+        
+        <!-- Subtle Fitness-themed Visual Banner -->
+        <div class="auth-fitness-banner">
+          <span class="auth-fitness-banner-icon">🔥</span>
+          <span><strong>Daily Consistency:</strong> Small home routines rebuild your momentum.</span>
+        </div>
+
+        <div class="auth-header">
+          <span class="badge badge-lime" style="margin-bottom: var(--space-xs);">WELCOME BACK</span>
+          <h1>Log In to FitBuddy</h1>
+          <p>Ready to continue your fitness journey?</p>
+        </div>
+
+        <!-- Transparent Milestone Stage Notice -->
+        <div class="auth-stage-notice">
+          <span style="font-size: 1.1rem; line-height: 1;">ℹ️</span>
+          <div>
+            <strong>Frontend Preview:</strong> Form has client validation. Spring Boot backend and MySQL account storage connect in Milestone 2.
+          </div>
+        </div>
+
+        <!-- Forgot Password Placeholder Info Box (Toggled on click) -->
+        <div id="forgotPasswordBox" class="forgot-password-box" role="status">
+          <strong>Password Reset Notice:</strong> Account recovery links will be sent via Java Mail in the Spring Boot backend milestone. For now, you can log in directly after filling in valid inputs.
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" novalidate>
+          
+          <!-- Email Input -->
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input 
+              type="email" 
+              id="email" 
+              class="form-input" 
+              placeholder="e.g. alex@college.edu or name@work.com"
+              autocomplete="email"
+              required
+            >
+            <div id="emailError" class="field-error" role="alert"></div>
+          </div>
+
+          <!-- Password Input -->
+          <div class="form-group">
+            <div class="flex-between" style="margin-bottom: var(--space-2xs);">
+              <label for="password" class="form-label" style="margin-bottom: 0;">Password</label>
+              <a href="#" id="forgotPasswordLink" style="font-size: 0.82rem; color: var(--forest-dark); font-weight: 600;">
+                Forgot password?
+              </a>
+            </div>
+
+            <div class="password-wrapper">
+              <input 
+                type="password" 
+                id="password" 
+                class="form-input" 
+                placeholder="Enter your password" 
+                autocomplete="current-password"
+                required
+              >
+              <button 
+                type="button" 
+                class="password-toggle-btn" 
+                data-target="password" 
+                aria-label="Show password text"
+              >
+                👁️
+              </button>
+            </div>
+            <div id="passwordError" class="field-error" role="alert"></div>
+            <div class="form-help">Must be at least 6 characters</div>
+          </div>
+
+          <!-- Remember Me Checkbox -->
+          <div class="form-group">
+            <label class="form-check" for="rememberMe">
+              <input type="checkbox" id="rememberMe">
+              <span>Remember me on this browser</span>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top: var(--space-xs);">
+            Log In to FitBuddy →
+          </button>
+
+        </form>
+
+        <!-- Link to Registration -->
+        <div class="auth-card-footer">
+          Don't have an account yet? 
+          <a href="register.html">Create one free</a>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       3. Footer
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <div>© <span class="current-year">2026</span> FitBuddy. All rights reserved.</div>
+      <div><a href="../index.html">Return to FitBuddy Home</a></div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/app.js"></script>
+  <script src="../js/auth.js"></script>
+</body>
+</html>

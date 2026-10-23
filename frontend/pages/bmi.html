@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Review your calculated BMI screening category and receive personalized workout and dietary suggestions based on your FitBuddy profile.">
+  <title>BMI Assessment & Suggestions — FitBuddy</title>
+
+  <!-- Google Fonts: Manrope (Headings) and Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core CSS Stylesheets (Relative paths from /pages/) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. Top Header
+       ========================================================================= -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="../index.html" class="brand" aria-label="FitBuddy Home">
+        <span class="brand-symbol">⚡</span>
+        <span>FitBuddy</span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Secondary Navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="workouts.html" class="nav-link">Workouts</a>
+        <a href="bmi.html" class="nav-link active">BMI Result</a>
+        <a href="diet.html" class="nav-link">Diet</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Dashboard</a>
+        <a href="profile-setup.html" class="btn btn-ghost btn-sm">Edit Profile</a>
+      </div>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. Main Content
+       ========================================================================= -->
+  <main class="section">
+    <div class="container" style="max-width: 860px;">
+      
+      <!-- Greeting & Section Header -->
+      <div class="section-header" style="margin-bottom: var(--space-xl);">
+        <span class="badge badge-lime">HEALTH SCREENING & BLUEPRINT</span>
+        <h1 style="margin-top: var(--space-xs); font-size: clamp(2rem, 4.5vw, 2.7rem);">Your Baseline BMI & Recommendations</h1>
+        <p id="userGreetingSubtitle">Here is your screening assessment and tailored home workout guidance based on your profile inputs.</p>
+      </div>
+
+      <!-- =====================================================================
+           Card 1: Primary BMI Metric & Category Display
+           ===================================================================== -->
+      <section class="bmi-result-card" aria-label="BMI Result Scorecard">
+        
+        <span class="badge badge-subtle">ESTIMATED BODY MASS INDEX</span>
+        
+        <!-- BMI Number Display -->
+        <div class="bmi-metric-number" id="bmiScoreDisplay">--</div>
+        
+        <!-- Category Badge -->
+        <div style="margin-bottom: var(--space-md);">
+          <span id="bmiCategoryBadge" class="badge badge-lime" style="font-size: 0.95rem; padding: 6px 18px;">
+            Calculating...
+          </span>
+        </div>
+
+        <p id="bmiQuickSummary" style="max-width: 580px; margin: 0 auto var(--space-lg) auto; font-size: 0.98rem;">
+          Loading your personalized physical screening summary...
+        </p>
+
+        <!-- Visual Multi-segment Range Bar -->
+        <div class="bmi-gauge-container">
+          <div class="bmi-gauge-track">
+            <div class="bmi-seg-under" title="Underweight (&lt; 18.5)"></div>
+            <div class="bmi-seg-normal" title="Normal weight (18.5 – 24.9)"></div>
+            <div class="bmi-seg-over" title="Overweight (25.0 – 29.9)"></div>
+            <div class="bmi-seg-obese" title="Obesity (≥ 30.0)"></div>
+          </div>
+          <div class="bmi-gauge-labels">
+            <span>&lt; 18.5 Underweight</span>
+            <span>18.5 – 24.9 Normal</span>
+            <span>25 – 29.9 Overweight</span>
+            <span>30+ Obese</span>
+          </div>
+        </div>
+
+        <!-- Metric Details Strip -->
+        <div class="flex-between" style="border-top: 1px solid var(--border-subtle); padding-top: var(--space-md); margin-top: var(--space-lg); font-size: 0.9rem; flex-wrap: wrap; gap: var(--space-sm);">
+          <div><strong>Recorded Height:</strong> <span id="displayHeight">--</span> cm</div>
+          <div><strong>Recorded Weight:</strong> <span id="displayWeight">--</span> kg</div>
+          <div><strong>Primary Goal:</strong> <span id="displayGoal">--</span></div>
+          <div><strong>Daily Duration:</strong> <span id="displayDuration">--</span></div>
+        </div>
+
+      </section>
+
+      <!-- =====================================================================
+           Card 2: Crucial Screening Measure & Bulk/Cut Limitation Explanations
+           ===================================================================== -->
+      <section class="card" style="margin-bottom: var(--space-xl); background-color: #FFFFFF; border-left: 4px solid var(--forest-dark);">
+        <h3 style="font-size: 1.25rem; margin-bottom: var(--space-xs); display: flex; align-items: center; gap: 8px;">
+          <span>🔍</span> Why BMI is Only a Screening Measure
+        </h3>
+        
+        <p style="margin-bottom: var(--space-md); font-size: 0.93rem;">
+          <strong>BMI is strictly an initial population screening tool, not a diagnostic measure of body composition.</strong> 
+          It calculates a simple mathematical ratio between your height and total weight. Because it cannot distinguish 
+          between heavy, dense muscle tissue and body fat, a lean muscular athlete can register in the "Overweight" range 
+          while an untrained individual with low muscle mass may register as "Normal".
+        </p>
+
+        <div style="background-color: var(--bg-card-subtle); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-md); font-size: 0.88rem; line-height: 1.55; margin-bottom: var(--space-md);">
+          <strong>⚠️ Not Sufficient for "Bulk vs. Cut" Decisions:</strong>
+          A single BMI value by itself is <em>not sufficient</em> to decide whether you should bulk (eat in a caloric surplus to add mass) or cut (eat in a caloric deficit to reduce fat). Such decisions require considering your actual body composition, waist measurements, daily strength progression, and energy levels.
+        </div>
+
+        <p style="font-size: 0.82rem; color: var(--text-dim); margin-bottom: 0;">
+          <strong>* Important Age Restriction Note:</strong> Standard adult BMI classifications apply only to men and women aged 20 and older. Adult BMI cutoffs are <em>not intended for children and adolescents</em>, whose growth must be interpreted using age-and-sex-specific pediatric percentiles.
+        </p>
+      </section>
+
+      <!-- =====================================================================
+           Card 3: Tailored General Suggestions Based on User Profile
+           ===================================================================== -->
+      <section style="margin-bottom: var(--space-2xl);">
+        
+        <div style="margin-bottom: var(--space-md);">
+          <span class="badge badge-lime">TAILORED GENERAL SUGGESTIONS</span>
+          <h2 style="font-size: 1.6rem; margin-top: var(--space-2xs);">Recommended Home Blueprint</h2>
+          <p>Practical daily guidance aligned with your specific goal, available equipment, and dietary choices.</p>
+        </div>
+
+        <!-- Suggestion 1: Training Structure -->
+        <article class="suggestion-card">
+          <div class="suggestion-icon">🏋️</div>
+          <div class="suggestion-content" style="flex-grow: 1;">
+            <h4 id="suggestionWorkoutTitle">Home Workout Routine</h4>
+            <p id="suggestionWorkoutDesc">Personalizing your workout plan based on your experience and goal...</p>
+            <div class="suggestion-tag-list" id="suggestionWorkoutTags">
+              <span class="badge badge-subtle">Bodyweight</span>
+              <span class="badge badge-subtle">Home Friendly</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Suggestion 2: Nutrition & Diet Focus -->
+        <article class="suggestion-card">
+          <div class="suggestion-icon">🥗</div>
+          <div class="suggestion-content" style="flex-grow: 1;">
+            <h4 id="suggestionDietTitle">Dietary Guidance</h4>
+            <p id="suggestionDietDesc">Tailoring practical high-protein food options for your diet preference...</p>
+            <div class="suggestion-tag-list" id="suggestionDietTags">
+              <span class="badge badge-subtle">Affordable Protein</span>
+              <span class="badge badge-subtle">Balanced Meals</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Suggestion 3: Daily Activity & Habit Strategy -->
+        <article class="suggestion-card">
+          <div class="suggestion-icon">⏱️</div>
+          <div class="suggestion-content" style="flex-grow: 1;">
+            <h4 id="suggestionHabitTitle">Daily Habit & Schedule Strategy</h4>
+            <p id="suggestionHabitDesc">Practical tips tailored to your activity level and study/work routine...</p>
+            <div class="suggestion-tag-list" id="suggestionHabitTags">
+              <span class="badge badge-subtle">Desk Relief</span>
+              <span class="badge badge-subtle">Consistency</span>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- =====================================================================
+           Card 4: Interactive Quick Recalculator
+           ===================================================================== -->
+      <section class="card" style="margin-bottom: var(--space-2xl);">
+        <h3 style="font-size: 1.2rem; margin-bottom: var(--space-xs);">Quick Recalculator</h3>
+        <p style="font-size: 0.9rem; margin-bottom: var(--space-md);">Adjust height or weight to immediately test how your screening values respond.</p>
+
+        <form id="bmiRecalculateForm">
+          <div class="grid grid-2" style="margin-bottom: var(--space-md);">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="recalcHeight" class="form-label">Height (cm)</label>
+              <input type="number" id="recalcHeight" class="form-input" min="50" max="250" step="0.5" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="recalcWeight" class="form-label">Weight (kg)</label>
+              <input type="number" id="recalcWeight" class="form-input" min="20" max="300" step="0.5" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-secondary btn-full">
+            Recalculate Live →
+          </button>
+        </form>
+      </section>
+
+      <!-- =====================================================================
+           Card 5: Professional Medical Disclaimer
+           ===================================================================== -->
+      <section class="footer-disclaimer" style="margin-bottom: var(--space-2xl); background-color: #FFFFFF;">
+        <strong>⚠️ Medical & Dietary Advice Disclaimer:</strong> 
+        FitBuddy does not provide medical diagnosis, treatment, or individualized medical nutrition therapy. 
+        All BMI classifications, workout suggestions, and dietary notes are strictly for educational and general wellness purposes. 
+        They do not replace personalized consultation with a licensed physician, clinical dietitian, or certified health practitioner. 
+        Always consult a qualified doctor before undertaking any new physical training program or changing your dietary habits, especially if you have pre-existing cardiovascular, joint, or metabolic conditions.
+      </section>
+
+      <!-- Bottom Navigation Action Buttons -->
+      <div class="flex-center" style="gap: var(--space-md); flex-wrap: wrap; margin-bottom: var(--space-3xl);">
+        <a href="dashboard.html" class="btn btn-primary btn-lg">
+          Continue to Dashboard →
+        </a>
+        <a href="workouts.html" class="btn btn-outline btn-lg">
+          Browse Home Workouts
+        </a>
+        <a href="profile-setup.html" class="btn btn-ghost btn-lg">
+          Edit Profile Inputs
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       3. Footer
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <div>© <span class="current-year">2026</span> FitBuddy. All rights reserved.</div>
+      <div><a href="../index.html">Return to FitBuddy Home</a></div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/app.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/bmi.js"></script>
+</body>
+</html>

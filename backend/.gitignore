@@ -1,0 +1,25 @@
+# FitBuddy Backend Git Ignore
+target/
+*.class
+*.jar
+*.war
+
+# Untracked local configuration file with real database passwords
+application-local.properties
+application-local.yml
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Log files
+*.log

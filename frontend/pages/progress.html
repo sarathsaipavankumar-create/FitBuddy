@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Track your body weight history, completed workouts, weekly activity consistency, and real workout streaks on FitBuddy.">
+  <title>Progress & Streak Tracker — FitBuddy</title>
+
+  <!-- Google Fonts: Manrope (Headings) and Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core CSS Stylesheets (Relative paths from /pages/) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body style="background-color: var(--bg-page);">
+
+  <!-- =========================================================================
+       1. HEADER & NAVIGATION BAR
+       ========================================================================= -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="../index.html" class="brand" aria-label="FitBuddy Home">
+        <span class="brand-symbol">⚡</span>
+        <span>FitBuddy</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="workouts.html" class="nav-link">Workouts</a>
+        <a href="bmi.html" class="nav-link">BMI</a>
+        <a href="diet.html" class="nav-link">Diet</a>
+        <a href="progress.html" class="nav-link active">Progress</a>
+      </nav>
+
+      <!-- Nav Action -->
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Dashboard</a>
+        <a href="workout-timer.html" class="btn btn-ghost btn-sm">⏱️ Timer</a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. PROGRESS TRACKER MAIN CONTENT
+       ========================================================================= -->
+  <main class="section" style="padding-top: var(--space-xl); padding-bottom: var(--space-4xl);">
+    <div class="container" style="max-width: 1000px;">
+
+      <!-- Breadcrumbs -->
+      <nav aria-label="Breadcrumb" style="margin-bottom: var(--space-lg); font-size: 0.88rem; color: var(--text-dim);">
+        <a href="../index.html" style="color: var(--text-muted); text-decoration: none;">Home</a>
+        <span style="margin: 0 6px;">/</span>
+        <a href="dashboard.html" style="color: var(--text-muted); text-decoration: none;">Dashboard</a>
+        <span style="margin: 0 6px;">/</span>
+        <span style="color: var(--forest-dark); font-weight: 600;">Progress & Streaks</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div style="text-align: center; margin-bottom: var(--space-2xl);">
+        <span class="badge badge-primary">DISCIPLINE OVER TIME</span>
+        <h1 style="font-size: clamp(1.85rem, 4vw, 2.4rem); margin-top: var(--space-xs); margin-bottom: var(--space-2xs);">
+          Workout Progress & Consistency Tracker
+        </h1>
+        <p style="color: var(--text-muted); font-size: 0.98rem; max-width: 620px; margin: 0 auto;">
+          Record your daily weigh-ins and completed workouts. Watch your consistency streak grow and review your trajectory over time.
+        </p>
+      </div>
+
+      <!-- =====================================================================
+           TRANSPARENT SAMPLE DEMO DATA BANNER
+           ===================================================================== -->
+      <div id="demoDataNoticeBanner" class="card" style="margin-bottom: var(--space-xl); background-color: #FFFBEB; border: 1px solid #FDE68A; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-md); padding: var(--space-md) var(--space-lg);">
+        <div style="display: flex; align-items: center; gap: var(--space-sm);">
+          <span style="font-size: 1.3rem;">ℹ️</span>
+          <div style="font-size: 0.88rem; color: #92400E;">
+            <strong>Sample Demonstration Data Active:</strong> Chart previews are pre-populated with sample entries. All demo logs are clearly tagged.
+          </div>
+        </div>
+        <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+          <button type="button" id="clearDemoDataBtn" class="btn btn-outline btn-sm" style="border-color: #D97706; color: #92400E; background: #FFFFFF;">
+            Clear Demo Data
+          </button>
+          <button type="button" id="resetSampleDataBtn" class="btn btn-ghost btn-sm" style="color: #92400E;">
+            Reset Demo
+          </button>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           3. FOUR TOP METRIC CARDS
+           ===================================================================== -->
+      <section class="progress-stat-grid" aria-label="Progress Summary Metrics">
+        
+        <!-- Card 1: Current Weight -->
+        <div class="dash-stat-card">
+          <div class="dash-stat-header">
+            <span class="dash-stat-label">Current Weight</span>
+            <span class="dash-stat-icon">⚖️</span>
+          </div>
+          <div class="dash-stat-value" id="metricCurrentWeight">68.0 kg</div>
+          <div class="dash-stat-sub" id="metricPrevWeight">Latest check-in</div>
+        </div>
+
+        <!-- Card 2: Dynamic Workout Streak -->
+        <div class="dash-stat-card">
+          <div class="dash-stat-header">
+            <span class="dash-stat-label">Active Streak</span>
+            <span class="dash-stat-icon">🔥</span>
+          </div>
+          <div class="dash-stat-value text-gradient" id="metricStreak">5 Days</div>
+          <div class="dash-stat-sub">Calculated from actual dates</div>
+        </div>
+
+        <!-- Card 3: Workouts Completed -->
+        <div class="dash-stat-card">
+          <div class="dash-stat-header">
+            <span class="dash-stat-label">Total Workouts</span>
+            <span class="dash-stat-icon">💪</span>
+          </div>
+          <div class="dash-stat-value" id="metricTotalWorkouts">5 Sessions</div>
+          <div class="dash-stat-sub">Recorded in history</div>
+        </div>
+
+        <!-- Card 4: Weekly Momentum Goal -->
+        <div class="dash-stat-card">
+          <div class="dash-stat-header">
+            <span class="dash-stat-label">Weekly Consistency</span>
+            <span class="dash-stat-icon">📈</span>
+          </div>
+          <div class="dash-stat-value" style="color: var(--forest-dark);">Active</div>
+          <div class="dash-stat-sub">Keep momentum moving!</div>
+        </div>
+
+      </section>
+
+      <!-- =====================================================================
+           4. ADD NEW PROGRESS ENTRY FORM
+           ===================================================================== -->
+      <section class="progress-form-card" aria-label="Record New Progress Entry">
+        <div style="margin-bottom: var(--space-md);">
+          <span class="badge badge-primary">NEW PROGRESS LOG</span>
+          <h2 style="font-size: 1.35rem; margin-top: var(--space-2xs); margin-bottom: 2px;">
+            Record Weight or Workout Session
+          </h2>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">
+            Enter today's weigh-in and completed training routine. Duplicate dates are updated gracefully.
+          </p>
+        </div>
+
+        <form id="progressLogForm">
+          <div class="progress-form-grid">
+            
+            <!-- 1. Date Input -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="logDate">
+                Date <span style="color:#ef4444;">*</span>
+              </label>
+              <input type="date" id="logDate" class="form-input" required>
+            </div>
+
+            <!-- 2. Body Weight Input -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="logWeight">
+                Body Weight (kg)
+              </label>
+              <input type="number" id="logWeight" class="form-input" placeholder="e.g. 68.0" step="0.1" min="20" max="300">
+            </div>
+
+            <!-- 3. Workout Completed Preset -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="logWorkoutName">
+                Workout Completed
+              </label>
+              <select id="logWorkoutName" class="filter-select">
+                <option value="Hostel Micro-Workout">Hostel Micro-Workout</option>
+                <option value="Full Body Circuit">Full Body Circuit</option>
+                <option value="Push-ups & Chest Focus">Push-ups & Chest Focus</option>
+                <option value="Bodyweight Squats & Legs">Bodyweight Squats & Legs</option>
+                <option value="Dumbbell Upper Body">Dumbbell Upper Body</option>
+                <option value="Core & Plank Circuit">Core & Plank Circuit</option>
+                <option value="Morning Cardio & Mobility">Morning Cardio & Mobility</option>
+                <option value="Custom">Other (Custom Routine)</option>
+              </select>
+            </div>
+
+            <!-- 4. Duration Input -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="logDuration">
+                Duration (Mins)
+              </label>
+              <input type="number" id="logDuration" class="form-input" placeholder="e.g. 30" min="1" max="300" value="30">
+            </div>
+
+            <!-- 5. Submit Button -->
+            <button type="submit" class="btn btn-primary" style="height: 44px; white-space: nowrap;">
+              Log Entry ✓
+            </button>
+          </div>
+
+          <!-- Optional Custom Workout Text Field (Hidden by default unless selected) -->
+          <div id="customWorkoutRow" style="margin-top: var(--space-sm); display: none;">
+            <input type="text" id="logCustomWorkout" class="form-input" placeholder="Type name of custom workout..." maxlength="50">
+          </div>
+        </form>
+      </section>
+
+      <!-- =====================================================================
+           5. PROGRESS CHARTS (Weight History & Weekly Activity)
+           ===================================================================== -->
+      <section class="progress-charts-grid" aria-label="Progress Charts">
+        
+        <!-- Chart 1: Weight History -->
+        <div class="progress-chart-card">
+          <div class="progress-chart-header">
+            <div>
+              <h3 style="font-size: 1.15rem; margin: 0;">Weight History</h3>
+              <small style="color: var(--text-dim);">Trend in body weight (kg)</small>
+            </div>
+            <span class="badge badge-outline">Kg over time</span>
+          </div>
+          <div class="progress-chart-canvas-wrap">
+            <canvas id="weightHistoryChart" aria-label="Weight history line chart" role="img"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 2: Weekly Workout Minutes -->
+        <div class="progress-chart-card">
+          <div class="progress-chart-header">
+            <div>
+              <h3 style="font-size: 1.15rem; margin: 0;">Weekly Activity</h3>
+              <small style="color: var(--text-dim);">Minutes logged this week</small>
+            </div>
+            <span class="badge badge-primary">Mon – Sun</span>
+          </div>
+          <div class="progress-chart-canvas-wrap">
+            <canvas id="weeklyWorkoutChart" aria-label="Weekly activity bar chart" role="img"></canvas>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- =====================================================================
+           6. 7-DAY CONSISTENCY STRIP
+           ===================================================================== -->
+      <section class="card" style="margin-bottom: var(--space-2xl);" aria-label="7-Day Consistency Snapshot">
+        <div class="flex-between" style="flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+          <div>
+            <h3 style="font-size: 1.15rem; margin: 0;">7-Day Consistency Snapshot</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 2px 0 0 0;">
+              Completed workouts for the current Monday–Sunday calendar week
+            </p>
+          </div>
+          <span class="badge badge-primary">ACTIVE WEEK</span>
+        </div>
+
+        <div id="progressWeeklyStrip" class="progress-weekly-strip">
+          <!-- Rendered dynamically by progress.js -->
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           7. PROGRESS & WORKOUT LOG TABLE
+           ===================================================================== -->
+      <section class="progress-history-card" aria-label="Recorded Progress History">
+        
+        <div class="flex-between" style="flex-wrap: wrap; gap: var(--space-md); margin-bottom: var(--space-sm);">
+          <div>
+            <h2 style="font-size: 1.25rem; margin: 0;">Recorded History Log</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 2px 0 0 0;">
+              Complete chronological record of all logged weigh-ins and workout sessions
+            </p>
+          </div>
+          <div style="font-size: 0.82rem; color: var(--text-dim);">
+            Shows newest entries first
+          </div>
+        </div>
+
+        <!-- Empty State Card (Visible when entries array is empty) -->
+        <div id="progressEmptyState" class="progress-empty-card" style="display: none;">
+          <div style="font-size: 3rem; margin-bottom: var(--space-sm);">📋</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: var(--space-2xs);">No Progress Logged Yet</h3>
+          <p style="color: var(--text-muted); max-width: 460px; margin: 0 auto var(--space-lg) auto; font-size: 0.92rem;">
+            Your progress history is currently clean. Use the form above to record your first workout or weigh-in, or load sample demo data to preview charts.
+          </p>
+          <button type="button" id="emptyLoadDemoBtn" class="btn btn-outline btn-sm">
+            Load Sample Demo Data
+          </button>
+        </div>
+
+        <!-- History Table Container -->
+        <div id="progressHistoryContent" class="progress-table-wrap">
+          <table class="progress-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Weight</th>
+                <th>Workout Routine</th>
+                <th>Duration</th>
+                <th>Source</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="progressTableBody">
+              <!-- Rendered dynamically by progress.js -->
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       8. FOOTER
+       ========================================================================= -->
+  <footer class="footer" style="background-color: #FFFFFF; border-top: 1px solid var(--border-subtle); padding: var(--space-2xl) 0; margin-top: var(--space-3xl);">
+    <div class="container footer-bottom">
+      <div style="font-size: 0.9rem; color: var(--text-dim);">
+        © <span class="current-year">2026</span> FitBuddy. Minimalist Fitness Platform.
+      </div>
+      <div style="display: flex; gap: var(--space-lg); font-size: 0.9rem;">
+        <a href="workouts.html" style="color: var(--forest-dark); font-weight: 600;">Workouts</a>
+        <a href="dashboard.html" style="color: var(--forest-dark); font-weight: 600;">Dashboard</a>
+        <a href="../index.html" style="color: var(--text-dim);">Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- External Library: Chart.js for Progress Charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- FitBuddy Core Scripts (Clean Separation: No Inline Logic) -->
+  <script src="../js/app.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/progress.js"></script>
+</body>
+</html>

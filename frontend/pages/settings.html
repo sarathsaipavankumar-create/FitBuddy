@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Configure your FitBuddy units, notification preferences, motion accessibility, and account session controls.">
+  <title>Preferences & Settings — FitBuddy</title>
+
+  <!-- Google Fonts: Manrope (Headings) and Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core CSS Stylesheets (Relative paths from /pages/) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body style="background-color: var(--bg-page);">
+
+  <!-- =========================================================================
+       1. HEADER & NAVIGATION BAR
+       ========================================================================= -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="../index.html" class="brand" aria-label="FitBuddy Home">
+        <span class="brand-symbol">⚡</span>
+        <span>FitBuddy</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="workouts.html" class="nav-link">Workouts</a>
+        <a href="bmi.html" class="nav-link">BMI</a>
+        <a href="diet.html" class="nav-link">Diet</a>
+        <a href="progress.html" class="nav-link">Progress</a>
+      </nav>
+
+      <!-- Nav Action -->
+      <div class="nav-actions">
+        <a href="profile.html" class="btn btn-outline btn-sm">👤 Profile</a>
+        <a href="dashboard.html" class="btn btn-ghost btn-sm">Dashboard</a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. SETTINGS MAIN CONTENT
+       ========================================================================= -->
+  <main class="section" style="padding-top: var(--space-xl); padding-bottom: var(--space-4xl);">
+    <div class="container" style="max-width: 800px;">
+
+      <!-- Breadcrumbs -->
+      <nav aria-label="Breadcrumb" style="margin-bottom: var(--space-lg); font-size: 0.88rem; color: var(--text-dim);">
+        <a href="../index.html" style="color: var(--text-muted); text-decoration: none;">Home</a>
+        <span style="margin: 0 6px;">/</span>
+        <a href="dashboard.html" style="color: var(--text-muted); text-decoration: none;">Dashboard</a>
+        <span style="margin: 0 6px;">/</span>
+        <span style="color: var(--forest-dark); font-weight: 600;">Settings & Preferences</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div style="text-align: center; margin-bottom: var(--space-2xl);">
+        <span class="badge badge-primary">APP CONFIGURATION</span>
+        <h1 style="font-size: clamp(1.85rem, 4vw, 2.4rem); margin-top: var(--space-xs); margin-bottom: var(--space-2xs);">
+          Preferences & Settings
+        </h1>
+        <p style="color: var(--text-muted); font-size: 0.98rem; max-width: 600px; margin: 0 auto;">
+          Configure your preferred measurement units, study-break reminders, motion accessibility, and active session state.
+        </p>
+      </div>
+
+      <!-- Demo State Notice -->
+      <div class="alert alert-info" style="margin-bottom: var(--space-xl);">
+        <span>ℹ️</span>
+        <div>
+          <strong>Client-Side Storage:</strong> Preferences are persisted in your local browser storage for this frontend milestone. No passwords or credentials are ever stored.
+        </div>
+      </div>
+
+      <form id="settingsPreferencesForm">
+        
+        <!-- =====================================================================
+             1. MEASUREMENT UNITS PREFERENCE
+             ===================================================================== -->
+        <section class="settings-card" aria-label="Measurement Units Preference">
+          <div class="flex-between" style="margin-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-sm); flex-wrap: wrap; gap: var(--space-xs);">
+            <div>
+              <h2 style="font-size: 1.25rem; margin: 0;">Measurement Units</h2>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 2px 0 0 0;">
+                Choose how weight, height, and exercise metrics are displayed
+              </p>
+            </div>
+            <span class="badge badge-primary" id="activeUnitsBadge">Metric (kg / cm)</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <label class="form-check" style="padding: var(--space-sm) 0;">
+              <input type="radio" name="unitsPreference" value="metric" checked>
+              <div>
+                <strong>Metric System (Kilograms & Centimeters)</strong>
+                <div style="font-size: 0.82rem; color: var(--text-muted);">Standard across college health screenings (kg, cm, meters)</div>
+              </div>
+            </label>
+
+            <label class="form-check" style="padding: var(--space-sm) 0;">
+              <input type="radio" name="unitsPreference" value="imperial">
+              <div>
+                <strong>Imperial System (Pounds & Feet/Inches)</strong>
+                <div style="font-size: 0.82rem; color: var(--text-muted);">Alternative format for international students (lbs, ft/in)</div>
+              </div>
+            </label>
+          </div>
+        </section>
+
+        <!-- =====================================================================
+             2. NOTIFICATION PREFERENCES UI
+             ===================================================================== -->
+        <section class="settings-card" aria-label="Notification Preferences">
+          <div style="margin-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-sm);">
+            <h2 style="font-size: 1.25rem; margin: 0;">Notification & Reminder Alerts</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 2px 0 0 0;">
+              Control study-break prompts, sound cues, and consistency nudges
+            </p>
+          </div>
+
+          <div>
+            <!-- Item 1: Daily Workout Reminder -->
+            <div class="settings-toggle-row">
+              <div>
+                <strong>Daily Study-Break Workout Reminder</strong>
+                <div style="font-size: 0.82rem; color: var(--text-muted);">
+                  Gentle evening nudge at 7:00 PM to step away from your desk and complete your micro-routine
+                </div>
+              </div>
+              <label class="form-check" style="margin: 0;">
+                <input type="checkbox" id="notifDailyWorkout" checked>
+              </label>
+            </div>
+
+            <!-- Item 2: Timer Sound Effects -->
+            <div class="settings-toggle-row">
+              <div>
+                <strong>Workout Interval Beep Tones</strong>
+                <div style="font-size: 0.82rem; color: var(--text-muted);">
+                  Synthesizes audio alerts during interval countdowns (last 3 seconds and interval complete)
+                </div>
+              </div>
+              <label class="form-check" style="margin: 0;">
+                <input type="checkbox" id="notifTimerBeeps" checked>
+              </label>
+            </div>
+
+            <!-- Item 3: Weekly Streak Reviews -->
+            <div class="settings-toggle-row">
+              <div>
+                <strong>Weekly Streak & Consistency Updates</strong>
+                <div style="font-size: 0.82rem; color: var(--text-muted);">
+                  End-of-week summary celebrating completed sessions and maintaining your streak momentum
+                </div>
+              </div>
+              <label class="form-check" style="margin: 0;">
+                <input type="checkbox" id="notifWeeklyStreak" checked>
+              </label>
+            </div>
+
+            <!-- Item 4: Hydration Prompts -->
+            <div class="settings-toggle-row">
+              <div>
+                <strong>Midday Hydration Reminders</strong>
+                <div style="font-size: 0.82rem; color: var(--text-muted);">
+                  Periodic alerts to drink a glass of water during long coding and lecture blocks
+                </div>
+              </div>
+              <label class="form-check" style="margin: 0;">
+                <input type="checkbox" id="notifHydration">
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================================
+             3. ACCESSIBILITY & REDUCED MOTION PREFERENCE
+             ===================================================================== -->
+        <section class="settings-card" aria-label="Accessibility & Display">
+          <div style="margin-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-sm);">
+            <h2 style="font-size: 1.25rem; margin: 0;">Display & Accessibility</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 2px 0 0 0;">
+              Adapt visual presentation for motion sensitivity or low-power devices
+            </p>
+          </div>
+
+          <div class="settings-toggle-row">
+            <div>
+              <strong>Reduced Motion Mode</strong>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">
+                Disables CSS keyframe exercise movement animations and smooth view transitions to reduce motion discomfort
+              </div>
+            </div>
+            <label class="form-check" style="margin: 0;">
+              <input type="checkbox" id="prefReducedMotion">
+            </label>
+          </div>
+        </section>
+
+        <!-- Save Button -->
+        <div style="margin-bottom: var(--space-2xl);">
+          <button type="submit" class="btn btn-primary btn-lg" style="min-width: 180px;">
+            Save Preferences ✓
+          </button>
+        </div>
+      </form>
+
+      <!-- =====================================================================
+           4. ACCOUNT SESSION & SIGN-OUT (With Security Notice)
+           ===================================================================== -->
+      <section class="settings-signout-card" aria-label="Account Session Controls">
+        <div class="flex-between" style="flex-wrap: wrap; gap: var(--space-md);">
+          <div>
+            <h3 style="font-size: 1.15rem; color: #991B1B; margin: 0;">Session Management</h3>
+            <p style="font-size: 0.85rem; color: #B91C1C; margin: 4px 0 0 0;">
+              Currently active in demo mode as <strong>Alex Explorer</strong>
+            </p>
+          </div>
+          <button type="button" id="signoutSessionBtn" class="btn btn-outline" style="border-color: #EF4444; color: #991B1B; background-color: #FFFFFF;">
+            Sign Out of Session 🚪
+          </button>
+        </div>
+
+        <div style="margin-top: var(--space-md); padding-top: var(--space-sm); border-top: 1px solid #FECACA; font-size: 0.82rem; color: #7F1D1D; line-height: 1.5;">
+          <strong>🔒 Security & Session Notice:</strong>
+          Signing out here resets your client-side demo state and clears local session cache. It does not claim to terminate an encrypted enterprise server session. When Spring Boot Security is integrated in Milestone 2, sign-out will securely revoke server-side HTTP-only session cookies and OAuth2 JWT tokens.
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       3. FOOTER
+       ========================================================================= -->
+  <footer class="footer" style="background-color: #FFFFFF; border-top: 1px solid var(--border-subtle); padding: var(--space-2xl) 0; margin-top: var(--space-3xl);">
+    <div class="container footer-bottom">
+      <div style="font-size: 0.9rem; color: var(--text-dim);">
+        © <span class="current-year">2026</span> FitBuddy. Minimalist Fitness Platform.
+      </div>
+      <div style="display: flex; gap: var(--space-lg); font-size: 0.9rem;">
+        <a href="workouts.html" style="color: var(--forest-dark); font-weight: 600;">Workouts</a>
+        <a href="dashboard.html" style="color: var(--forest-dark); font-weight: 600;">Dashboard</a>
+        <a href="../index.html" style="color: var(--text-dim);">Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FitBuddy Core Scripts (Clean Separation: No Inline Logic) -->
+  <script src="../js/app.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/settings.js"></script>
+</body>
+</html>

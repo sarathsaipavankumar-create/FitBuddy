@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Complete your FitBuddy fitness profile to calculate your baseline BMI and receive personalized home workout and diet recommendations.">
+  <title>Profile Setup — FitBuddy</title>
+
+  <!-- Google Fonts: Manrope (Headings) and Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core CSS Stylesheets (Relative paths from /pages/) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. Header
+       ========================================================================= -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="../index.html" class="brand" aria-label="FitBuddy Home">
+        <span class="brand-symbol">⚡</span>
+        <span>FitBuddy</span>
+      </a>
+
+      <div>
+        <a href="../index.html" class="btn btn-ghost btn-sm">← Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. Profile Setup Form Container
+       ========================================================================= -->
+  <main class="section">
+    <div class="container profile-form-container">
+      
+      <!-- Stage & Step Heading -->
+      <div class="section-header" style="margin-bottom: var(--space-xl);">
+        <span class="badge badge-lime">STEP 2 OF 2 • PERSONALIZATION</span>
+        <h1 style="margin-top: var(--space-xs); font-size: clamp(1.8rem, 4vw, 2.4rem);">Set Up Your Fitness Profile</h1>
+        <p>Tell us about your physical metrics and routine so FitBuddy can calculate your baseline BMI and tailor your home workouts.</p>
+      </div>
+
+      <!-- Developmental Demo Notice -->
+      <div class="auth-stage-notice" style="margin-bottom: var(--space-xl);">
+        <span style="font-size: 1.2rem; line-height: 1;">ℹ️</span>
+        <div>
+          <strong>Frontend Milestone Demo:</strong> Profile preferences are saved to client demo session storage (`fitbuddy_demo_profile_data`). In Milestone 2, this will persist to MySQL via Spring Boot REST APIs.
+        </div>
+      </div>
+
+      <!-- Profile Form -->
+      <form id="profileSetupForm" novalidate>
+
+        <!-- ===================================================================
+             Fieldset 1: Personal Demographics
+             =================================================================== -->
+        <fieldset class="form-fieldset">
+          <legend class="form-legend">
+            <span>1. Basic Information</span>
+            <span class="form-legend-badge">Demographics</span>
+          </legend>
+
+          <div class="grid grid-2" style="margin-bottom: var(--space-md);">
+            <!-- Name -->
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name <span style="color:#ef4444;">*</span></label>
+              <input 
+                type="text" 
+                id="name" 
+                class="form-input" 
+                placeholder="e.g. Alex Sharma" 
+                required
+              >
+              <div id="nameError" class="field-error"></div>
+            </div>
+
+            <!-- Age -->
+            <div class="form-group">
+              <label for="age" class="form-label">Age (in years) <span style="color:#ef4444;">*</span></label>
+              <input 
+                type="number" 
+                id="age" 
+                class="form-input" 
+                placeholder="e.g. 21" 
+                min="12" 
+                max="100" 
+                required
+              >
+              <div id="ageError" class="field-error"></div>
+              <div class="form-help">Enter age between 12 and 100</div>
+            </div>
+          </div>
+
+          <!-- Gender (Segmented control pills) -->
+          <div class="form-group">
+            <label class="form-label">Gender <span style="color:#ef4444;">*</span></label>
+            <div class="segmented-control" role="radiogroup" aria-labelledby="genderLabel">
+              <label class="segmented-pill">
+                <input type="radio" name="gender" value="Male" checked>
+                <span>Male</span>
+              </label>
+              <label class="segmented-pill">
+                <input type="radio" name="gender" value="Female">
+                <span>Female</span>
+              </label>
+              <label class="segmented-pill">
+                <input type="radio" name="gender" value="Non-Binary">
+                <span>Non-Binary / Other</span>
+              </label>
+              <label class="segmented-pill">
+                <input type="radio" name="gender" value="Prefer not to say">
+                <span>Prefer not to say</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ===================================================================
+             Fieldset 2: Body Metrics for BMI Calculation
+             =================================================================== -->
+        <fieldset class="form-fieldset">
+          <legend class="form-legend">
+            <span>2. Body Metrics</span>
+            <span class="form-legend-badge">Screening Values</span>
+          </legend>
+
+          <div class="grid grid-2">
+            <!-- Height in cm -->
+            <div class="form-group">
+              <label for="height" class="form-label">Height (in cm) <span style="color:#ef4444;">*</span></label>
+              <input 
+                type="number" 
+                id="height" 
+                class="form-input" 
+                placeholder="e.g. 175" 
+                min="50" 
+                max="250" 
+                step="0.5" 
+                required
+              >
+              <div id="heightError" class="field-error"></div>
+              <div class="form-help">Reasonable range: 50 cm – 250 cm</div>
+            </div>
+
+            <!-- Weight in kg -->
+            <div class="form-group">
+              <label for="weight" class="form-label">Weight (in kg) <span style="color:#ef4444;">*</span></label>
+              <input 
+                type="number" 
+                id="weight" 
+                class="form-input" 
+                placeholder="e.g. 68" 
+                min="20" 
+                max="300" 
+                step="0.5" 
+                required
+              >
+              <div id="weightError" class="field-error"></div>
+              <div class="form-help">Reasonable range: 20 kg – 300 kg</div>
+            </div>
+          </div>
+
+          <!-- Activity Level -->
+          <div class="form-group" style="margin-top: var(--space-sm); margin-bottom: 0;">
+            <label for="activityLevel" class="form-label">Daily Activity Level <span style="color:#ef4444;">*</span></label>
+            <select id="activityLevel" class="form-select" required>
+              <option value="" disabled selected>-- Select your daily activity level --</option>
+              <option value="Sedentary">Sedentary (mostly sitting, desk work, long study sessions)</option>
+              <option value="Lightly Active">Lightly Active (daily light walking or light activity 1–2 days/week)</option>
+              <option value="Moderately Active">Moderately Active (moderate workout sessions 3–5 days/week)</option>
+              <option value="Very Active">Very Active (intense daily physical training or labor)</option>
+            </select>
+            <div id="activityLevelError" class="field-error"></div>
+          </div>
+        </fieldset>
+
+        <!-- ===================================================================
+             Fieldset 3: Fitness Goal & Diet Preference
+             =================================================================== -->
+        <fieldset class="form-fieldset">
+          <legend class="form-legend">
+            <span>3. Goal & Diet</span>
+            <span class="form-legend-badge">Your Direction</span>
+          </legend>
+
+          <!-- Fitness Goals (Selectable cards) -->
+          <div class="form-group">
+            <label class="form-label">Primary Fitness Goal <span style="color:#ef4444;">*</span></label>
+            <div class="option-grid option-grid-3" style="margin-bottom: var(--space-md);">
+              
+              <label class="selectable-option-card">
+                <input type="radio" name="fitnessGoal" value="General Fitness" checked>
+                <div class="option-icon">⚡</div>
+                <div class="option-title">General Fitness</div>
+                <div class="option-desc">Daily energy, posture correction, and general vitality</div>
+              </label>
+
+              <label class="selectable-option-card">
+                <input type="radio" name="fitnessGoal" value="Weight Management">
+                <div class="option-icon">⚖️</div>
+                <div class="option-title">Weight Management</div>
+                <div class="option-desc">Healthy fat loss, caloric deficit, and cardiovascular conditioning</div>
+              </label>
+
+              <label class="selectable-option-card">
+                <input type="radio" name="fitnessGoal" value="Muscle Gain">
+                <div class="option-icon">💪</div>
+                <div class="option-title">Muscle Gain</div>
+                <div class="option-desc">Lean muscle hypertrophy and progressive resistance</div>
+              </label>
+
+              <label class="selectable-option-card">
+                <input type="radio" name="fitnessGoal" value="Strength">
+                <div class="option-icon">🏋️</div>
+                <div class="option-title">Strength</div>
+                <div class="option-desc">Peak bodyweight power, pushup progressions, and core stability</div>
+              </label>
+
+              <label class="selectable-option-card">
+                <input type="radio" name="fitnessGoal" value="Endurance">
+                <div class="option-icon">🏃</div>
+                <div class="option-title">Endurance</div>
+                <div class="option-desc">Stamina, HIIT work-capacity, and prolonged stamina</div>
+              </label>
+
+            </div>
+          </div>
+
+          <!-- Diet Preference -->
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Dietary Preference <span style="color:#ef4444;">*</span></label>
+            <div class="segmented-control">
+              <label class="segmented-pill">
+                <input type="radio" name="dietPreference" value="Vegetarian" checked>
+                <span>🥗 Vegetarian</span>
+              </label>
+              <label class="segmented-pill">
+                <input type="radio" name="dietPreference" value="Eggetarian">
+                <span>🍳 Eggetarian</span>
+              </label>
+              <label class="segmented-pill">
+                <input type="radio" name="dietPreference" value="Non-Vegetarian">
+                <span>🍗 Non-Vegetarian</span>
+              </label>
+            </div>
+            <div class="form-help">Helps FitBuddy suggest cheap, high-protein food staples suited to your lifestyle</div>
+          </div>
+        </fieldset>
+
+        <!-- ===================================================================
+             Fieldset 4: Equipment & Workout Logistics
+             =================================================================== -->
+        <fieldset class="form-fieldset">
+          <legend class="form-legend">
+            <span>4. Logistics & Routine</span>
+            <span class="form-legend-badge">Practical Setup</span>
+          </legend>
+
+          <!-- Available Equipment -->
+          <div class="form-group">
+            <label class="form-label">Available Equipment <span style="color:#ef4444;">*</span></label>
+            <div class="segmented-control">
+              <label class="segmented-pill">
+                <input type="radio" name="equipment" value="No Equipment" checked>
+                <span>🏠 No Equipment (Bodyweight only)</span>
+              </label>
+              <label class="segmented-pill">
+                <input type="radio" name="equipment" value="Dumbbells">
+                <span>🏋️ Dumbbells</span>
+              </label>
+              <label class="segmented-pill">
+                <input type="radio" name="equipment" value="Resistance Bands">
+                <span>🎗️ Resistance Bands</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="grid grid-2" style="margin-top: var(--space-md); margin-bottom: 0;">
+            <!-- Workout Experience -->
+            <div class="form-group">
+              <label for="workoutExperience" class="form-label">Workout Experience <span style="color:#ef4444;">*</span></label>
+              <select id="workoutExperience" class="form-select" required>
+                <option value="Beginner" selected>Beginner (New to regular training or rebuilding)</option>
+                <option value="Intermediate">Intermediate (Familiar with standard calisthenics)</option>
+                <option value="Advanced">Advanced (Consistent bodyweight & strength mastery)</option>
+              </select>
+            </div>
+
+            <!-- Preferred Workout Duration -->
+            <div class="form-group">
+              <label for="workoutDuration" class="form-label">Preferred Daily Duration <span style="color:#ef4444;">*</span></label>
+              <select id="workoutDuration" class="form-select" required>
+                <option value="15 minutes">15 minutes (Quick micro-session)</option>
+                <option value="30 minutes" selected>30 minutes (Balanced daily routine)</option>
+                <option value="45 minutes">45 minutes (Comprehensive session)</option>
+                <option value="60 minutes">60 minutes (Extended workout flow)</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Submit Button -->
+        <div style="text-align: center; margin-top: var(--space-xl); margin-bottom: var(--space-2xl);">
+          <button type="submit" class="btn btn-primary btn-lg" style="min-width: 280px;">
+            Calculate My BMI & View Suggestions →
+          </button>
+          <div style="margin-top: var(--space-sm); font-size: 0.85rem; color: var(--text-dim);">
+            Instant calculation • 100% Free • No credit card required
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       3. Footer
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <div>© <span class="current-year">2026</span> FitBuddy. All rights reserved.</div>
+      <div><a href="../index.html">Return to Home</a></div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/app.js"></script>
+  <script src="../js/profile.js"></script>
+</body>
+</html>

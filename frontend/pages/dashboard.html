@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FitBuddy Member Dashboard - Track your home workouts, daily streaks, BMI metrics, and personalized fitness goals.">
+  <title>Overview Dashboard — FitBuddy</title>
+
+  <!-- Google Fonts: Manrope (Headings) and Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core CSS Stylesheets (Relative paths from /pages/) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body style="background-color: var(--bg-page);">
+
+  <div class="dashboard-layout">
+    
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+    <!-- =======================================================================
+         1. DESKTOP & MOBILE SIDEBAR NAVIGATION
+         ======================================================================= -->
+    <aside class="dashboard-sidebar" id="dashboardSidebar" aria-label="Sidebar Navigation">
+      
+      <!-- Sidebar Brand Header -->
+      <div class="sidebar-header">
+        <a href="../index.html" class="brand" aria-label="FitBuddy Home">
+          <span class="brand-symbol">⚡</span>
+          <span>FitBuddy</span>
+        </a>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Sidebar Navigation Links -->
+      <nav class="sidebar-nav">
+        <!-- 1. Overview (Current Page) -->
+        <a href="dashboard.html" class="sidebar-link active" aria-current="page">
+          <span class="sidebar-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </span>
+          <span>Overview</span>
+        </a>
+
+        <!-- 2. Workouts -->
+        <a href="workouts.html" class="sidebar-link">
+          <span class="sidebar-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12M2 12h4M18 12h4"></path>
+            </svg>
+          </span>
+          <span>Workouts</span>
+        </a>
+
+        <!-- 3. Diet Plan -->
+        <a href="diet.html" class="sidebar-link">
+          <span class="sidebar-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+            </svg>
+          </span>
+          <span>Diet Plan</span>
+        </a>
+
+        <!-- 4. Progress -->
+        <a href="progress.html" class="sidebar-link">
+          <span class="sidebar-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </span>
+          <span>Progress</span>
+        </a>
+
+        <!-- 5. Subscription -->
+        <a href="subscription.html" class="sidebar-link">
+          <span class="sidebar-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+              <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+          </span>
+          <span>Subscription</span>
+        </a>
+
+        <!-- 6. Profile -->
+        <a href="profile.html" class="sidebar-link">
+          <span class="sidebar-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </span>
+          <span>Profile</span>
+        </a>
+
+        <!-- 7. Settings -->
+        <a href="settings.html" class="sidebar-link">
+          <span class="sidebar-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </span>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <a href="../index.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Return to Home</span>
+        </a>
+      </div>
+
+    </aside>
+
+    <!-- =======================================================================
+         2. MAIN DASHBOARD CONTENT AREA
+         ======================================================================= -->
+    <div class="dashboard-main">
+      
+      <!-- Top Header / Topbar -->
+      <header class="dashboard-topbar">
+        <div class="dashboard-topbar-left">
+          <button class="dashboard-menu-btn" id="dashboardMenuBtn" aria-label="Open sidebar menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="dashboard-page-title">Overview Dashboard</div>
+        </div>
+
+        <!-- User Profile Chip on Topbar -->
+        <a href="profile.html" class="dashboard-user-chip" id="dashboardUserChip" title="View your member profile" aria-label="User Profile">
+          <div class="user-avatar-circle" id="userAvatarInitial">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <span id="userChipName">Explorer</span>
+          <span id="userChipBadge" class="badge badge-subtle" style="font-size: 0.72rem; padding: 2px 8px;">Demo Member</span>
+        </a>
+      </header>
+
+      <!-- Dashboard Scrollable Body -->
+      <main class="dashboard-body">
+
+        <!-- Personalized Welcome Banner -->
+        <div class="flex-between" style="flex-wrap: wrap; gap: var(--space-md); margin-bottom: var(--space-xl);">
+          <div>
+            <span class="badge badge-lime" id="demoDataStatusBadge" style="margin-bottom: var(--space-2xs);">
+              Personalized Demo Data
+            </span>
+            <h1 id="dashboardUserGreeting" style="font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin: 4px 0;">
+              Welcome back, FitBuddy Explorer! 👋
+            </h1>
+            <p id="dashboardUserSubtitle" style="margin: 0; font-size: 0.95rem;">
+              "REBUILD YOURSELF FROM SCRATCH." • Consistency over perfection.
+            </p>
+          </div>
+
+          <div class="flex" style="gap: var(--space-sm); align-items: center; flex-wrap: wrap;">
+            <button id="demoToggleBtn" class="btn btn-outline btn-sm" onclick="toggleDemoProfileMode()">
+              Switch to Empty State
+            </button>
+            <a href="profile-setup.html" class="btn btn-outline btn-sm">Edit Profile</a>
+            <a href="workouts.html" class="btn btn-primary btn-sm">Start Today's Workout →</a>
+          </div>
+        </div>
+
+        <!-- Friendly Empty State Alert (Conditionally shown if no profile exists) -->
+        <section id="dashboardEmptyStateAlert" class="dashboard-empty-card" style="display: none;" aria-label="Empty State Notification">
+          <div class="dashboard-empty-left">
+            <div class="dashboard-empty-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <div>
+              <h4 style="margin: 0 0 4px 0; font-size: 1.05rem;">No Active Profile Detected</h4>
+              <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">
+                You are currently previewing sample fitness metrics. Complete your 2-minute Profile Setup to calculate your personal baseline BMI, calibrate zero-equipment home workouts, and get budget-friendly meal guidance!
+              </p>
+            </div>
+          </div>
+          <div class="dashboard-empty-actions">
+            <button class="btn btn-outline btn-sm" onclick="loadSampleDemoProfile()">
+              Load Demo Profile
+            </button>
+            <a href="profile-setup.html" class="btn btn-primary btn-sm">
+              Set Up Profile Now →
+            </a>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             3. METRIC STAT CARDS GRID (4 Columns)
+             =================================================================== -->
+        <section class="dash-stat-grid" aria-label="Key Fitness Metrics">
+          
+          <!-- Card 1: Current BMI -->
+          <article class="dash-stat-card">
+            <div class="dash-stat-header">
+              <div class="dash-stat-title-wrap">
+                <span class="dash-stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                  </svg>
+                </span>
+                <span class="dash-stat-label">Current BMI</span>
+              </div>
+              <span id="dashBmiSourceBadge" class="dash-data-badge badge badge-subtle">Sample Data</span>
+            </div>
+            <div class="dash-stat-value" id="dashBmiValue">22.4</div>
+            <div class="dash-stat-sub">
+              <span id="dashBmiBadge" class="badge badge-lime">Normal</span>
+              <span id="dashBmiSubtext" style="color: var(--text-dim); margin-left: 4px;">Screening baseline</span>
+            </div>
+          </article>
+
+          <!-- Card 2: Fitness Goal -->
+          <article class="dash-stat-card">
+            <div class="dash-stat-header">
+              <div class="dash-stat-title-wrap">
+                <span class="dash-stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="6"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                  </svg>
+                </span>
+                <span class="dash-stat-label">Fitness Goal</span>
+              </div>
+              <span id="dashGoalSourceBadge" class="dash-data-badge badge badge-subtle">Sample Data</span>
+            </div>
+            <div class="dash-stat-value" id="dashGoalValue" style="font-size: 1.45rem;">General Fitness</div>
+            <div class="dash-stat-sub" id="dashGoalSubtext">Primary training target</div>
+          </article>
+
+          <!-- Card 3: Current Weight -->
+          <article class="dash-stat-card">
+            <div class="dash-stat-header">
+              <div class="dash-stat-title-wrap">
+                <span class="dash-stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+                    <circle cx="12" cy="10" r="3"></circle>
+                    <path d="M12 10l2-2"></path>
+                  </svg>
+                </span>
+                <span class="dash-stat-label">Current Weight</span>
+              </div>
+              <span id="dashWeightSourceBadge" class="dash-data-badge badge badge-subtle">Sample Data</span>
+            </div>
+            <div class="dash-stat-value" id="dashWeightValue">68 kg</div>
+            <div class="dash-stat-sub" id="dashWeightSubtext">Recorded baseline metric</div>
+          </article>
+
+          <!-- Card 4: Completed Workouts -->
+          <article class="dash-stat-card">
+            <div class="dash-stat-header">
+              <div class="dash-stat-title-wrap">
+                <span class="dash-stat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                  </svg>
+                </span>
+                <span class="dash-stat-label">Completed Workouts</span>
+              </div>
+              <span id="dashCompletedSourceBadge" class="dash-data-badge badge badge-subtle">Sample Data</span>
+            </div>
+            <div class="dash-stat-value" id="dashCompletedCount">4 Sessions</div>
+            <div class="dash-stat-sub" id="dashCompletedSubtext">Consistent weekly streak</div>
+          </article>
+
+        </section>
+
+        <!-- ===================================================================
+             4. WORKOUT SPOTLIGHT & WEEKLY ACTIVITY CHART (2-Column Grid)
+             =================================================================== -->
+        <section class="dash-main-grid" aria-label="Workout Recommendation and Activity Trends">
+          
+          <!-- Today's Recommended Workout Spotlight -->
+          <article class="workout-spotlight-card">
+            <div class="workout-spotlight-header">
+              <div>
+                <span class="badge badge-lime" id="spotlightTypeBadge" style="margin-bottom: var(--space-2xs);">
+                  TODAY'S RECOMMENDED WORKOUT
+                </span>
+                <h3 id="spotlightWorkoutTitle" style="margin-top: 4px;">30-Min Upper Body Calisthenics</h3>
+              </div>
+              <div class="dash-stat-icon" style="background-color: var(--primary-accent); color: var(--forest-dark);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+            </div>
+
+            <p id="spotlightWorkoutDesc" style="font-size: 0.92rem; color: var(--text-muted); flex-grow: 1;">
+              Push-up variations, doorway rows, and core plank holds calibrated to build lean strength right from your living room or hostel space.
+            </p>
+
+            <!-- Routine Specs -->
+            <div class="workout-routine-specs">
+              <div class="workout-spec-unit">
+                <small>Recommended Duration</small>
+                <strong id="spotlightDurationText">30 Minutes</strong>
+              </div>
+              <div class="workout-spec-unit">
+                <small>Required Gear</small>
+                <strong id="spotlightEquipText">No Equipment</strong>
+              </div>
+              <div class="workout-spec-unit">
+                <small>Target Direction</small>
+                <strong id="spotlightGoalText">General Fitness</strong>
+              </div>
+            </div>
+
+            <!-- Start Action Buttons -->
+            <div class="flex" style="gap: var(--space-sm); flex-wrap: wrap;">
+              <a href="workout-timer.html" class="btn btn-primary" style="flex: 1;">
+                Start Workout Timer ⏱️
+              </a>
+              <a href="workouts.html" class="btn btn-outline" style="flex: 1;">
+                Browse All Routines
+              </a>
+            </div>
+          </article>
+
+          <!-- Weekly Activity Chart -->
+          <article class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 2px;">Weekly Activity</h3>
+                <small style="color: var(--text-dim); font-size: 0.82rem;">Minutes active Mon – Sun</small>
+              </div>
+              <span id="chartStreakBadge" class="badge badge-subtle">4 Days Active</span>
+            </div>
+
+            <!-- Chart Container (Chart.js Canvas) -->
+            <div class="chart-wrapper">
+              <canvas id="weeklyActivityChart" aria-label="Weekly Activity Chart" role="img"></canvas>
+            </div>
+
+            <!-- Pure CSS Bar Chart Fallback (Shown seamlessly if Chart.js is offline) -->
+            <div class="css-bar-chart" id="cssBarChartFallback" style="display: none;" aria-label="Weekly Activity Fallback Bar Chart">
+              <div class="css-bar-col">
+                <span class="css-bar-val">30m</span>
+                <div class="css-bar-fill" style="height: 50%;"></div>
+                <span class="css-bar-label">Mon</span>
+              </div>
+              <div class="css-bar-col">
+                <span class="css-bar-val">45m</span>
+                <div class="css-bar-fill" style="height: 75%;"></div>
+                <span class="css-bar-label">Tue</span>
+              </div>
+              <div class="css-bar-col">
+                <span class="css-bar-val">0m</span>
+                <div class="css-bar-fill" style="height: 4px; background-color: var(--border-subtle);"></div>
+                <span class="css-bar-label">Wed</span>
+              </div>
+              <div class="css-bar-col">
+                <span class="css-bar-val">30m</span>
+                <div class="css-bar-fill" style="height: 50%;"></div>
+                <span class="css-bar-label">Thu</span>
+              </div>
+              <div class="css-bar-col">
+                <span class="css-bar-val">25m</span>
+                <div class="css-bar-fill" style="height: 42%;"></div>
+                <span class="css-bar-label">Fri</span>
+              </div>
+              <div class="css-bar-col">
+                <span class="css-bar-val">40m</span>
+                <div class="css-bar-fill active-day" style="height: 66%;"></div>
+                <span class="css-bar-label">Sat</span>
+              </div>
+              <div class="css-bar-col">
+                <span class="css-bar-val">0m</span>
+                <div class="css-bar-fill" style="height: 4px; background-color: var(--border-subtle);"></div>
+                <span class="css-bar-label">Sun</span>
+              </div>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- ===================================================================
+             5. QUICK ACTION LINKS (Workouts, Diet, Progress)
+             =================================================================== -->
+        <section aria-label="Quick Navigation Cards">
+          <h3 style="font-size: 1.25rem; margin-bottom: var(--space-md);">Quick Actions</h3>
+
+          <div class="dash-quick-links-grid">
+            
+            <!-- Quick Link 1: Workouts -->
+            <a href="workouts.html" class="quick-link-card">
+              <div class="quick-link-card-header">
+                <div class="quick-link-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12M2 12h4M18 12h4"></path>
+                  </svg>
+                </div>
+                <h4>Workout Routines</h4>
+              </div>
+              <p>Explore zero-equipment micro-workouts, posture flows, and interval countdowns.</p>
+              <div class="quick-link-action">
+                <span>Browse Workouts</span>
+                <span>→</span>
+              </div>
+            </a>
+
+            <!-- Quick Link 2: Diet -->
+            <a href="diet.html" class="quick-link-card">
+              <div class="quick-link-card-header">
+                <div class="quick-link-icon" style="background-color: #FEF3C7; color: #B45309;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                  </svg>
+                </div>
+                <h4>Diet & Nutrition</h4>
+              </div>
+              <p>Budget-friendly high-protein food swaps for student messes and quick home prep.</p>
+              <div class="quick-link-action">
+                <span>View Meal Plans</span>
+                <span>→</span>
+              </div>
+            </a>
+
+            <!-- Quick Link 3: Progress -->
+            <a href="progress.html" class="quick-link-card">
+              <div class="quick-link-card-header">
+                <div class="quick-link-icon" style="background-color: #E0F2FE; color: #0369A1;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                    <polyline points="17 6 23 6 23 12"></polyline>
+                  </svg>
+                </div>
+                <h4>Progress Tracker</h4>
+              </div>
+              <p>Review daily streaks, workout history logs, and baseline BMI trends.</p>
+              <div class="quick-link-action">
+                <span>View Streak Stats</span>
+                <span>→</span>
+              </div>
+            </a>
+
+          </div>
+        </section>
+
+      </main>
+
+      <!-- Dashboard Footer -->
+      <footer class="footer" style="padding: var(--space-xl) var(--space-2xl); background-color: #FFFFFF; border-top: 1px solid var(--border-subtle); margin-top: var(--space-3xl);">
+        <div class="flex-between" style="font-size: 0.85rem; color: var(--text-dim); flex-wrap: wrap; gap: var(--space-sm);">
+          <div>© <span class="current-year">2026</span> FitBuddy. Member Dashboard Prototype.</div>
+          <div><a href="../index.html" style="color: var(--forest-dark); font-weight: 600;">← Back to Landing Page</a></div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- External Library: Chart.js for Weekly Activity Chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- FitBuddy Scripts -->
+  <script src="../js/app.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

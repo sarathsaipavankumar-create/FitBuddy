@@ -1,0 +1,61 @@
+# ===================================================================
+# FitBuddy - Root Git Ignore File
+# ===================================================================
+
+# Compiled Java & Build Artifacts
+**/target/
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+
+# Local Configuration & Sensitive Credentials
+# NEVER commit database passwords, API keys, or private tokens
+**/application-local.properties
+**/application-local.yml
+application-local.properties
+application-local.yml
+*.env
+*.env.local
+!*.env.example
+secrets.properties
+
+# Log Files & Crash Dumps
+*.log
+logs/
+**/logs/
+*.stackdump
+hs_err_pid*
+
+# IDE & Editor Artifacts
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Operating System Specific Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Node / Package Manager Files (if applicable)
+node_modules/
+dist/
+build/
+.npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,19 @@
+# ===================================================================
+# Local Development Database Configuration Template
+# ===================================================================
+# To configure your local MySQL database:
+# 1. Copy this file and rename it to 'application-local.properties'
+# 2. Enter your MySQL password below
+# 3. 'application-local.properties' is listed in .gitignore so your password is never committed.
+#
+# Alternatively, set the environment variable in your terminal:
+# $env:SPRING_DATASOURCE_PASSWORD = "your_actual_mysql_password"
+# ===================================================================
+
+spring.datasource.url=jdbc:mysql://localhost:3306/fitbuddy_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=YOUR_LOCAL_MYSQL_PASSWORD_HERE
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# Enable JPA Auto-configuration when local DB is connected:
+spring.autoconfigure.exclude=

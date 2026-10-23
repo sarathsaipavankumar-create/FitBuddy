@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personalized budget-friendly daily meal planner for hostel and home living. Simple meal suggestions tailored to your dietary preference and fitness goal.">
+  <title>Diet & Nutrition Planner — FitBuddy</title>
+
+  <!-- Google Fonts: Manrope (Headings) and Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core CSS Stylesheets (Relative paths from /pages/) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body style="background-color: var(--bg-page);">
+
+  <!-- =========================================================================
+       1. HEADER & NAVIGATION BAR
+       ========================================================================= -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="../index.html" class="brand" aria-label="FitBuddy Home">
+        <span class="brand-symbol">⚡</span>
+        <span>FitBuddy</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="workouts.html" class="nav-link">Workouts</a>
+        <a href="bmi.html" class="nav-link">BMI</a>
+        <a href="diet.html" class="nav-link active">Diet</a>
+        <a href="progress.html" class="nav-link">Progress</a>
+      </nav>
+
+      <!-- Nav Action -->
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Dashboard</a>
+        <a href="workout-timer.html" class="btn btn-ghost btn-sm">⏱️ Timer</a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. DIET PLANNER MAIN CONTENT
+       ========================================================================= -->
+  <main class="section" style="padding-top: var(--space-xl); padding-bottom: var(--space-4xl);">
+    <div class="container" style="max-width: 900px;">
+
+      <!-- Breadcrumbs -->
+      <nav aria-label="Breadcrumb" style="margin-bottom: var(--space-lg); font-size: 0.88rem; color: var(--text-dim);">
+        <a href="../index.html" style="color: var(--text-muted); text-decoration: none;">Home</a>
+        <span style="margin: 0 6px;">/</span>
+        <a href="dashboard.html" style="color: var(--text-muted); text-decoration: none;">Dashboard</a>
+        <span style="margin: 0 6px;">/</span>
+        <span style="color: var(--forest-dark); font-weight: 600;">Diet Plan</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div style="text-align: center; margin-bottom: var(--space-2xl);">
+        <span class="badge badge-primary">BUDGET & HOSTEL NUTRITION</span>
+        <h1 style="font-size: clamp(1.85rem, 4vw, 2.4rem); margin-top: var(--space-xs); margin-bottom: var(--space-2xs);">
+          Personalized Daily Meal Planner
+        </h1>
+        <p style="color: var(--text-muted); font-size: 0.98rem; max-width: 620px; margin: 0 auto;">
+          Practical, budget-friendly meal ideas using common pantry foods. No complex macro tracking, no costly supplements, and no tedious prep.
+        </p>
+      </div>
+
+      <!-- =====================================================================
+           INTERACTIVE SELECTORS CARD (Goal & Diet Preference)
+           ===================================================================== -->
+      <section class="diet-selector-card" id="dietControlsCard" aria-label="Meal Plan Customization Selectors">
+        
+        <!-- 1. Dietary Preference Selector -->
+        <div class="diet-filter-section">
+          <label class="diet-filter-label" id="dietPrefLabel">
+            <span>🥗 Dietary Preference</span>
+            <small style="text-transform: none; font-weight: 500; color: var(--text-dim);">(Click to switch)</small>
+          </label>
+          <div class="diet-filter-chips" role="group" aria-labelledby="dietPrefLabel">
+            <button type="button" class="diet-chip diet-pref-chip active" data-pref="Vegetarian" aria-pressed="true">
+              🌱 Vegetarian
+            </button>
+            <button type="button" class="diet-chip diet-pref-chip" data-pref="Eggetarian" aria-pressed="false">
+              🥚 Eggetarian
+            </button>
+            <button type="button" class="diet-chip diet-pref-chip" data-pref="Non-Vegetarian" aria-pressed="false">
+              🍗 Non-Vegetarian
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Fitness Goal Selector -->
+        <div class="diet-filter-section">
+          <label class="diet-filter-label" id="fitnessGoalLabel">
+            <span>🎯 Primary Fitness Goal</span>
+            <small style="text-transform: none; font-weight: 500; color: var(--text-dim);">(Click to align meal focus)</small>
+          </label>
+          <div class="diet-filter-chips" role="group" aria-labelledby="fitnessGoalLabel">
+            <button type="button" class="diet-chip fitness-goal-chip active" data-goal="General Fitness" aria-pressed="true">
+              ⚡ General Fitness
+            </button>
+            <button type="button" class="diet-chip fitness-goal-chip" data-goal="Weight Management" aria-pressed="false">
+              ⚖️ Weight Management
+            </button>
+            <button type="button" class="diet-chip fitness-goal-chip" data-goal="Muscle Gain" aria-pressed="false">
+              💪 Muscle Gain
+            </button>
+            <button type="button" class="diet-chip fitness-goal-chip" data-goal="Strength" aria-pressed="false">
+              🏋️ Strength
+            </button>
+            <button type="button" class="diet-chip fitness-goal-chip" data-goal="Endurance" aria-pressed="false">
+              🏃 Endurance
+            </button>
+          </div>
+        </div>
+
+        <!-- Active Sync Notice Bar -->
+        <div class="diet-sync-bar">
+          <div id="dietProfileSyncNotice">
+            Loading your profile preferences...
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-dim);">
+            💡 Use <strong>Swap Meal</strong> on any card to see quick alternatives
+          </div>
+        </div>
+
+      </section>
+
+      <!-- =====================================================================
+           FIVE MEAL CARDS (Breakfast, Mid-Morning, Lunch, Evening Snack, Dinner)
+           ===================================================================== -->
+      <section id="dietMealCardsContainer" class="diet-meal-grid" aria-label="Five Daily Meal Suggestions">
+        <!-- Rendered dynamically by diet.js -->
+      </section>
+
+      <!-- =====================================================================
+           MANDATORY DIETARY ADVICE DISCLAIMER
+           ===================================================================== -->
+      <aside class="diet-disclaimer-box" role="note" aria-label="Dietary advice disclaimer">
+        <div class="diet-disclaimer-icon">⚠️</div>
+        <div class="diet-disclaimer-text">
+          <strong>Important Dietary Notice:</strong>
+          <p>This plan provides general fitness-oriented meal suggestions. Consult a qualified nutrition professional for personalized dietary advice, especially if you have medical conditions or special dietary requirements.</p>
+        </div>
+      </aside>
+
+      <!-- =====================================================================
+           PRACTICAL STUDENT & BUDGET NUTRITION GUIDELINES
+           ===================================================================== -->
+      <section style="margin-top: var(--space-2xl);">
+        <h3 style="font-size: 1.25rem; font-family: var(--font-headings); margin-bottom: var(--space-md); text-align: center;">
+          Practical Hostel & Home Nutrition Rules
+        </h3>
+
+        <div class="grid grid-3">
+          <div class="card" style="padding: var(--space-lg);">
+            <div style="font-size: 1.8rem; margin-bottom: var(--space-xs);">🫕</div>
+            <h4 style="font-size: 1.05rem; margin-bottom: var(--space-2xs);">Hostel Friendly</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">
+              Most suggestions require only an electric kettle, a toaster, or simple room-temperature assembly without a complete kitchen.
+            </p>
+          </div>
+
+          <div class="card" style="padding: var(--space-lg);">
+            <div style="font-size: 1.8rem; margin-bottom: var(--space-xs);">💰</div>
+            <h4 style="font-size: 1.05rem; margin-bottom: var(--space-2xs);">Budget First</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">
+              Anchor your nutrition around high-value staples: eggs, black chana, oats, curd, bananas, and peanut butter for under ₹80/day.
+            </p>
+          </div>
+
+          <div class="card" style="padding: var(--space-lg);">
+            <div style="font-size: 1.8rem; margin-bottom: var(--space-xs);">💧</div>
+            <h4 style="font-size: 1.05rem; margin-bottom: var(--space-2xs);">Hydration Target</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">
+              Drink 2.5 to 3 liters of water evenly throughout your study and workout hours to maintain high focus and cellular energy.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       3. FOOTER
+       ========================================================================= -->
+  <footer class="footer" style="background-color: #FFFFFF; border-top: 1px solid var(--border-subtle); padding: var(--space-2xl) 0; margin-top: var(--space-3xl);">
+    <div class="container footer-bottom">
+      <div style="font-size: 0.9rem; color: var(--text-dim);">
+        © <span class="current-year">2026</span> FitBuddy. Minimalist Fitness Platform.
+      </div>
+      <div style="display: flex; gap: var(--space-lg); font-size: 0.9rem;">
+        <a href="workouts.html" style="color: var(--forest-dark); font-weight: 600;">Workouts</a>
+        <a href="dashboard.html" style="color: var(--forest-dark); font-weight: 600;">Dashboard</a>
+        <a href="../index.html" style="color: var(--text-dim);">Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FitBuddy Core Scripts (Clean Separation: No Inline Logic) -->
+  <script src="../js/app.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/diet.js"></script>
+</body>
+</html>
