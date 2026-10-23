@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Exercise form guide, targeted muscles, sets, repetitions, step-by-step instructions, and safety cues on FitBuddy.">
+  <title>Exercise Details — FitBuddy</title>
+
+  <!-- Google Fonts: Manrope (Headings) and Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core CSS Stylesheets (Relative paths from /pages/) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body style="background-color: var(--bg-page);">
+
+  <!-- =========================================================================
+       1. HEADER & NAVIGATION BAR
+       ========================================================================= -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="../index.html" class="brand" aria-label="FitBuddy Home">
+        <span class="brand-symbol">⚡</span>
+        <span>FitBuddy</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="workouts.html" class="nav-link active">Workouts</a>
+        <a href="bmi.html" class="nav-link">BMI</a>
+        <a href="diet.html" class="nav-link">Diet</a>
+        <a href="progress.html" class="nav-link">Progress</a>
+      </nav>
+
+      <!-- Nav Action -->
+      <div class="nav-actions">
+        <a href="workouts.html" class="btn btn-outline btn-sm">← Back to Catalogue</a>
+        <a href="workout-timer.html" class="btn btn-primary btn-sm">⏱️ Open Timer</a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. EXERCISE DETAILS CONTENT
+       ========================================================================= -->
+  <main class="section" style="padding-top: var(--space-2xl); padding-bottom: var(--space-4xl);">
+    <div class="container" style="max-width: 1100px;">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav aria-label="Breadcrumb" style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: var(--space-lg); display: flex; align-items: center; gap: 8px;">
+        <a href="workouts.html" style="color: var(--forest-dark); font-weight: 600;">Workouts</a>
+        <span>/</span>
+        <span id="breadcrumbCategory" style="color: var(--text-muted); font-weight: 600;">Category</span>
+        <span>/</span>
+        <span id="breadcrumbName" style="color: var(--text-main); font-weight: 700;">Exercise</span>
+      </nav>
+
+      <!-- Exercise Header -->
+      <div class="flex-between" style="flex-wrap: wrap; gap: var(--space-md); margin-bottom: var(--space-md);">
+        <div>
+          <div class="exercise-meta-tags" style="margin-bottom: var(--space-xs);">
+            <span id="exerciseCategoryBadge" class="badge badge-lime">Category</span>
+            <span id="exerciseEquipBadge" class="badge-equipment no-equip">Equipment</span>
+            <span id="exerciseDiffBadge" class="badge-difficulty beginner">Difficulty</span>
+          </div>
+          <h1 id="exerciseTitle" style="font-size: clamp(2rem, 4.5vw, 2.8rem); margin: 0; color: var(--text-main);">
+            Exercise Name
+          </h1>
+        </div>
+
+        <!-- Primary Start Exercise Action -->
+        <div style="display: flex; gap: var(--space-sm); align-items: center; flex-wrap: wrap;">
+          <a href="workout-timer.html" id="startExerciseTimerBtn" class="btn btn-primary btn-lg" style="box-shadow: 0 4px 14px rgba(185, 243, 106, 0.55);">
+            START EXERCISE ⏱️
+          </a>
+          <a href="workouts.html" class="btn btn-outline btn-lg">
+            ← Catalogue
+          </a>
+        </div>
+      </div>
+
+      <!-- Main 2-Column Layout -->
+      <div class="exercise-detail-grid">
+        
+        <!-- Left Column: Visual Illustration & Quick Specs Card -->
+        <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
+          
+          <!-- Visual Illustration Card -->
+          <article class="exercise-detail-visual-card">
+            <span class="badge badge-subtle" style="margin-bottom: var(--space-md); font-size: 0.72rem;">
+              ANATOMICAL MOVEMENT DIAGRAM
+            </span>
+
+            <!-- Inline SVG Diagram Container -->
+            <div class="exercise-detail-svg-container" id="exerciseSvgContainer" aria-label="Exercise Motion Illustration">
+              <!-- Rendered by exercise-details.js -->
+            </div>
+
+            <!-- Quick Specs Grid -->
+            <div class="detail-specs-grid">
+              <div class="detail-spec-box">
+                <small>Sets</small>
+                <strong id="specSets">3 - 4 Sets</strong>
+              </div>
+              <div class="detail-spec-box">
+                <small>Reps / Time</small>
+                <strong id="specReps">10 - 15 Reps</strong>
+              </div>
+              <div class="detail-spec-box">
+                <small>Rest</small>
+                <strong id="specRest">60 Seconds</strong>
+              </div>
+              <div class="detail-spec-box">
+                <small>Body Part</small>
+                <strong id="specBodyPart">Target</strong>
+              </div>
+              <div class="detail-spec-box">
+                <small>Equipment</small>
+                <strong id="specEquip">No Equipment</strong>
+              </div>
+              <div class="detail-spec-box">
+                <small>Difficulty</small>
+                <strong id="specDiff">Beginner</strong>
+              </div>
+            </div>
+
+            <!-- Start Exercise CTA inside Visual Card -->
+            <div style="margin-top: var(--space-xl); width: 100%;">
+              <a href="workout-timer.html" class="btn btn-primary btn-full" onclick="document.getElementById('startExerciseTimerBtn').click(); return false;">
+                Start Exercise Timer ⏱️
+              </a>
+            </div>
+          </article>
+
+          <!-- Beginner Variation Card -->
+          <article class="beginner-variation-box">
+            <div style="font-size: 1.8rem; line-height: 1; color: #15803D;">💡</div>
+            <div>
+              <strong style="display: block; font-size: 0.95rem; color: #166534; margin-bottom: 2px;">
+                Suitable Beginner Variation:
+              </strong>
+              <p id="beginnerVariationText" style="margin: 0; font-size: 0.88rem; color: #166534; line-height: 1.5;">
+                Loading variation...
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Right Column: Muscles, Instructions, Form & Safety Tips -->
+        <article class="exercise-detail-info-card">
+          
+          <!-- Section 1: Muscles Targeted -->
+          <div>
+            <h2 class="detail-section-title">
+              <span>🎯</span>
+              <span>Targeted Muscles</span>
+            </h2>
+            <div style="background-color: var(--bg-page); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-md); font-size: 0.95rem; color: var(--text-main);">
+              <span id="exerciseMuscles">Loading targeted muscle groups...</span>
+            </div>
+          </div>
+
+          <!-- Section 2: Step-by-Step Instructions -->
+          <div>
+            <h2 class="detail-section-title">
+              <span>📋</span>
+              <span>Step-by-Step Instructions</span>
+            </h2>
+            <div class="instruction-step-list" id="instructionList">
+              <!-- Rendered dynamically by exercise-details.js -->
+            </div>
+          </div>
+
+          <!-- Section 3: Form and Safety Tips -->
+          <div>
+            <h2 class="detail-section-title">
+              <span>🛡️</span>
+              <span>Form & Safety Tips</span>
+            </h2>
+            <div class="form-tips-box">
+              <ul class="form-tips-list" id="formTipsList">
+                <!-- Rendered dynamically by exercise-details.js -->
+              </ul>
+            </div>
+          </div>
+
+        </article>
+
+      </div>
+
+      <!-- =====================================================================
+           3. RELATED EXERCISES SECTION
+           ===================================================================== -->
+      <section style="margin-top: var(--space-4xl);" aria-label="Related Exercises">
+        <div class="flex-between" style="margin-bottom: var(--space-lg); flex-wrap: wrap; gap: var(--space-sm);">
+          <div>
+            <h3 style="font-size: 1.45rem; margin-bottom: 4px;">Continue Your Routine</h3>
+            <p style="margin: 0; font-size: 0.9rem;">Related movements in this category for a complete training session.</p>
+          </div>
+          <a href="workouts.html" class="btn btn-outline btn-sm">
+            Browse All 20+ Exercises →
+          </a>
+        </div>
+
+        <div class="grid grid-3" id="relatedExercisesContainer">
+          <!-- Rendered dynamically by exercise-details.js -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       4. FOOTER
+       ========================================================================= -->
+  <footer class="footer" style="background-color: #FFFFFF; border-top: 1px solid var(--border-subtle); padding: var(--space-2xl) 0; margin-top: var(--space-3xl);">
+    <div class="container footer-bottom">
+      <div style="font-size: 0.9rem; color: var(--text-dim);">
+        © <span class="current-year">2026</span> FitBuddy. Member Exercise Library.
+      </div>
+      <div style="display: flex; gap: var(--space-lg); font-size: 0.9rem;">
+        <a href="workouts.html" style="color: var(--forest-dark); font-weight: 600;">All Workouts</a>
+        <a href="dashboard.html" style="color: var(--forest-dark); font-weight: 600;">Dashboard</a>
+        <a href="../index.html" style="color: var(--text-dim);">Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FitBuddy Scripts -->
+  <script src="../js/app.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/exercise-data.js"></script>
+  <script src="../js/exercise-details.js"></script>
+</body>
+</html>

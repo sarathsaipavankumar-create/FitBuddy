@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your FitBuddy member profile, personal metrics, training goals, and dietary preferences.">
+  <title>User Profile — FitBuddy</title>
+
+  <!-- Google Fonts: Manrope (Headings) and Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core CSS Stylesheets (Relative paths from /pages/) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body style="background-color: var(--bg-page);">
+
+  <!-- =========================================================================
+       1. HEADER & NAVIGATION BAR
+       ========================================================================= -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="../index.html" class="brand" aria-label="FitBuddy Home">
+        <span class="brand-symbol">⚡</span>
+        <span>FitBuddy</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="workouts.html" class="nav-link">Workouts</a>
+        <a href="bmi.html" class="nav-link">BMI</a>
+        <a href="diet.html" class="nav-link">Diet</a>
+        <a href="progress.html" class="nav-link">Progress</a>
+      </nav>
+
+      <!-- Nav Action -->
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Dashboard</a>
+        <a href="settings.html" class="btn btn-ghost btn-sm">⚙️ Settings</a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. USER PROFILE MAIN CONTENT
+       ========================================================================= -->
+  <main class="section" style="padding-top: var(--space-xl); padding-bottom: var(--space-4xl);">
+    <div class="container" style="max-width: 900px;">
+
+      <!-- Breadcrumbs -->
+      <nav aria-label="Breadcrumb" style="margin-bottom: var(--space-lg); font-size: 0.88rem; color: var(--text-dim);">
+        <a href="../index.html" style="color: var(--text-muted); text-decoration: none;">Home</a>
+        <span style="margin: 0 6px;">/</span>
+        <a href="dashboard.html" style="color: var(--text-muted); text-decoration: none;">Dashboard</a>
+        <span style="margin: 0 6px;">/</span>
+        <span style="color: var(--forest-dark); font-weight: 600;">Member Profile</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div style="text-align: center; margin-bottom: var(--space-2xl);">
+        <span class="badge badge-primary">MEMBER PROFILE</span>
+        <h1 style="font-size: clamp(1.85rem, 4vw, 2.4rem); margin-top: var(--space-xs); margin-bottom: var(--space-2xs);">
+          Personal Fitness Profile
+        </h1>
+        <p style="color: var(--text-muted); font-size: 0.98rem; max-width: 620px; margin: 0 auto;">
+          Review and update your biometric benchmarks, fitness goals, and training constraints.
+        </p>
+      </div>
+
+      <!-- =====================================================================
+           PROFILE OVERVIEW & LIVE BMI STATUS CARD
+           ===================================================================== -->
+      <section class="profile-overview-card" aria-label="Profile Overview">
+        <div class="profile-avatar-box">
+          <div class="profile-avatar-circle" id="profileAvatarLetter">
+            A
+          </div>
+          <div>
+            <h2 id="displayProfileName" style="font-size: 1.45rem; margin-bottom: 2px;">Alex Explorer</h2>
+            <div style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 6px;">
+              FitBuddy Student Member • Hostel Tier
+            </div>
+            <div id="displayProfileMeta" style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">
+              General Fitness • Vegetarian • No Equipment
+            </div>
+          </div>
+        </div>
+
+        <!-- Live BMI Quick Box -->
+        <div class="profile-live-bmi-card">
+          <small style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-dim); font-weight: 700; display: block; margin-bottom: 2px;">
+            Current Calculated BMI
+          </small>
+          <div style="font-size: 1.85rem; font-weight: 800; font-family: var(--font-headings); color: var(--forest-dark); line-height: 1.1;" id="liveBmiValue">
+            22.2
+          </div>
+          <span class="badge badge-primary" id="liveBmiBadge" style="margin-top: 4px;">
+            Normal Weight
+          </span>
+        </div>
+      </section>
+
+      <!-- Transparent Demo Data Notice -->
+      <div class="alert alert-info" style="margin-bottom: var(--space-xl);">
+        <span>ℹ️</span>
+        <div>
+          <strong>Frontend Prototype (Milestone 1):</strong> Profile updates are saved locally to your browser session. In Milestone 2, your data will sync securely via Spring Boot REST APIs and a MySQL database. No passwords are stored in browser storage.
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           EDIT PROFILE FORM CARD
+           ===================================================================== -->
+      <section class="card" aria-label="Edit Profile Details">
+        <div style="margin-bottom: var(--space-xl); border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-md);">
+          <h3 style="font-size: 1.25rem; margin-bottom: 4px;">Edit Profile Information</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">
+            Adjusting your height or weight automatically recalculates your BMI in real time.
+          </p>
+        </div>
+
+        <form id="userProfileForm">
+          <div class="profile-edit-grid">
+            
+            <!-- 1. Full Name -->
+            <div class="form-group">
+              <label class="form-label" for="profileName">
+                Full Name <span style="color:#ef4444;">*</span>
+              </label>
+              <input type="text" id="profileName" class="form-input" required maxlength="60" placeholder="e.g. Alex Explorer">
+            </div>
+
+            <!-- 2. Age -->
+            <div class="form-group">
+              <label class="form-label" for="profileAge">
+                Age <span style="color:#ef4444;">*</span>
+              </label>
+              <input type="number" id="profileAge" class="form-input" required min="10" max="120" placeholder="e.g. 21">
+            </div>
+
+            <!-- 3. Height (cm) -->
+            <div class="form-group">
+              <label class="form-label" for="profileHeight">
+                Height (cm) <span style="color:#ef4444;">*</span>
+              </label>
+              <input type="number" id="profileHeight" class="form-input" required min="50" max="250" placeholder="e.g. 175" step="0.5">
+              <small style="color: var(--text-dim); font-size: 0.75rem;">Updates live BMI preview</small>
+            </div>
+
+            <!-- 4. Weight (kg) -->
+            <div class="form-group">
+              <label class="form-label" for="profileWeight">
+                Weight (kg) <span style="color:#ef4444;">*</span>
+              </label>
+              <input type="number" id="profileWeight" class="form-input" required min="20" max="300" placeholder="e.g. 68.0" step="0.1">
+              <small style="color: var(--text-dim); font-size: 0.75rem;">Updates live BMI preview</small>
+            </div>
+
+            <!-- 5. Fitness Goal -->
+            <div class="form-group">
+              <label class="form-label" for="profileFitnessGoal">
+                Fitness Goal <span style="color:#ef4444;">*</span>
+              </label>
+              <select id="profileFitnessGoal" class="filter-select">
+                <option value="General Fitness">General Fitness</option>
+                <option value="Weight Management">Weight Management</option>
+                <option value="Muscle Gain">Muscle Gain</option>
+                <option value="Strength">Strength</option>
+                <option value="Endurance">Endurance</option>
+              </select>
+            </div>
+
+            <!-- 6. Daily Activity Level -->
+            <div class="form-group">
+              <label class="form-label" for="profileActivityLevel">
+                Activity Level <span style="color:#ef4444;">*</span>
+              </label>
+              <select id="profileActivityLevel" class="filter-select">
+                <option value="Sedentary">Sedentary (Desk work / studying)</option>
+                <option value="Lightly Active">Lightly Active (1–2 days/week)</option>
+                <option value="Moderately Active">Moderately Active (3–5 days/week)</option>
+                <option value="Very Active">Very Active (6–7 days/week)</option>
+              </select>
+            </div>
+
+            <!-- 7. Available Equipment -->
+            <div class="form-group">
+              <label class="form-label" for="profileEquipment">
+                Available Equipment <span style="color:#ef4444;">*</span>
+              </label>
+              <select id="profileEquipment" class="filter-select">
+                <option value="No Equipment">No Equipment (Bodyweight only)</option>
+                <option value="Dumbbells">Dumbbells</option>
+                <option value="Resistance Bands">Resistance Bands</option>
+                <option value="Full Home Gym">Full Home Gym</option>
+              </select>
+            </div>
+
+            <!-- 8. Dietary Preference -->
+            <div class="form-group">
+              <label class="form-label" for="profileDietPreference">
+                Dietary Preference <span style="color:#ef4444;">*</span>
+              </label>
+              <select id="profileDietPreference" class="filter-select">
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Eggetarian">Eggetarian</option>
+                <option value="Non-Vegetarian">Non-Vegetarian</option>
+              </select>
+            </div>
+
+          </div>
+
+          <!-- Form Action Buttons -->
+          <div class="flex-between" style="margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid var(--border-subtle); flex-wrap: wrap; gap: var(--space-md);">
+            <button type="button" id="resetProfileBtn" class="btn btn-outline">
+              Reset Form
+            </button>
+            <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+              <a href="dashboard.html" class="btn btn-ghost">Cancel</a>
+              <button type="submit" class="btn btn-primary" style="min-width: 170px;">
+                Save Profile Changes ✓
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       3. FOOTER
+       ========================================================================= -->
+  <footer class="footer" style="background-color: #FFFFFF; border-top: 1px solid var(--border-subtle); padding: var(--space-2xl) 0; margin-top: var(--space-3xl);">
+    <div class="container footer-bottom">
+      <div style="font-size: 0.9rem; color: var(--text-dim);">
+        © <span class="current-year">2026</span> FitBuddy. Minimalist Fitness Platform.
+      </div>
+      <div style="display: flex; gap: var(--space-lg); font-size: 0.9rem;">
+        <a href="workouts.html" style="color: var(--forest-dark); font-weight: 600;">Workouts</a>
+        <a href="dashboard.html" style="color: var(--forest-dark); font-weight: 600;">Dashboard</a>
+        <a href="../index.html" style="color: var(--text-dim);">Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FitBuddy Core Scripts (Clean Separation: No Inline Logic) -->
+  <script src="../js/app.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/user-profile.js"></script>
+</body>
+</html>

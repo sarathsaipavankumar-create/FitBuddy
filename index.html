@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FitBuddy - Rebuild yourself from scratch. Build a consistent home fitness routine with zero equipment, tailored for students and busy working professionals.">
+  <title>FitBuddy — Rebuild Yourself From Scratch</title>
+
+  <!-- Google Fonts: Manrope (Headings) and Inter (Body Text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core CSS Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. HEADER & NAVIGATION BAR
+       ========================================================================= -->
+  <header class="header">
+    <div class="container header-container">
+      
+      <!-- FitBuddy Logo -->
+      <a href="index.html" class="brand" aria-label="FitBuddy Home">
+        <span class="brand-symbol">⚡</span>
+        <span>FitBuddy</span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="#workout-preview" class="nav-link">Workouts</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#about" class="nav-link">About</a>
+
+        <!-- Mobile-Only Action Buttons inside Drawer -->
+        <div class="mobile-actions">
+          <a href="pages/login.html" class="btn btn-outline btn-full">Login</a>
+          <a href="pages/register.html" class="btn btn-primary btn-full">Get Started</a>
+        </div>
+      </nav>
+
+      <!-- Desktop Action Buttons -->
+      <div class="nav-actions">
+        <a href="pages/login.html" class="btn btn-ghost">Login</a>
+        <a href="pages/register.html" class="btn btn-primary">Get Started</a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        ☰
+      </button>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================================================================
+         2. HERO SECTION
+         ========================================================================= -->
+    <section class="section hero" id="home">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Hero Left Content -->
+          <div class="hero-content">
+            <div>
+              <span class="badge badge-lime">⚡ HOME FITNESS FOR REAL SCHEDULES</span>
+            </div>
+
+            <h1>
+              REBUILD YOURSELF <br>
+              <span class="highlight-lime">FROM SCRATCH.</span>
+            </h1>
+
+            <p>
+              You don’t need an expensive gym membership, crowded commute, or fancy machines. 
+              FitBuddy helps students and busy professionals build a sustainable, consistent fitness routine 
+              right at home in just 15 to 30 minutes a day.
+            </p>
+
+            <!-- Hero Call-to-Actions -->
+            <div class="hero-actions">
+              <a href="pages/register.html" class="btn btn-primary btn-lg">
+                Start Your Journey →
+              </a>
+              <a href="#workout-preview" class="btn btn-outline btn-lg">
+                Explore Workouts
+              </a>
+            </div>
+
+            <!-- Small Supporting Statistic Cards (Without Invented Claims) -->
+            <div class="hero-stats-row">
+              <div class="hero-stat-card">
+                <div class="stat-icon">🏠</div>
+                <strong>0 Equipment</strong>
+                <span>Hostel & living room friendly</span>
+              </div>
+              <div class="hero-stat-card">
+                <div class="stat-icon">⏱️</div>
+                <strong>15–30 Min</strong>
+                <span>Focused micro-routines</span>
+              </div>
+              <div class="hero-stat-card">
+                <div class="stat-icon">🎯</div>
+                <strong>3 Levels</strong>
+                <span>Beginner to progressive</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Hero Right Visual -->
+          <div class="hero-image-wrapper">
+            <img 
+              src="assets/images/hero-fitness.jpg" 
+              alt="Young athletic person performing a focused bodyweight core plank on an exercise mat in a bright apartment room"
+              width="600"
+              height="450"
+              loading="eager"
+            >
+            <!-- Floating Aesthetic Info Card -->
+            <div class="hero-floating-badge">
+              <div class="hero-floating-icon">🔥</div>
+              <div>
+                <strong style="font-size: 0.9rem; display: block; color: var(--text-main);">Daily Consistency</strong>
+                <small style="color: var(--text-dim); font-size: 0.78rem;">15-min morning or study break routine</small>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         3. FEATURES SECTION (3 Attractive Cards)
+         ========================================================================= -->
+    <section class="section" id="features">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="badge badge-lime">CORE PILLARS</span>
+          <h2>Everything You Need to Stay Consistent</h2>
+          <p>
+            Designed specifically for small spaces, tight study schedules, and long desk hours. 
+            No overcomplicated fluff—just practical habits that stick.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          
+          <!-- Feature 1: Personalized Home Workouts -->
+          <article class="card feature-card">
+            <div class="feature-icon-box">🏋️</div>
+            <h3>Personalized Home Workouts</h3>
+            <p>
+              Smart bodyweight calisthenics, HIIT, and mobility flows crafted to fit your fitness level 
+              and schedule without requiring heavy gym gear.
+            </p>
+            <ul class="feature-list">
+              <li><span class="feature-list-check">✓</span> 100% equipment-free movements</li>
+              <li><span class="feature-list-check">✓</span> Quick 15–25 minute micro sessions</li>
+              <li><span class="feature-list-check">✓</span> Posture relief for desk workers</li>
+            </ul>
+          </article>
+
+          <!-- Feature 2: Simple Diet Suggestions -->
+          <article class="card feature-card">
+            <div class="feature-icon-box">🥗</div>
+            <h3>Simple Diet Suggestions</h3>
+            <p>
+              Realistic, budget-friendly nutrition advice designed for hostel messes and quick home meals. 
+              No expensive supplements or complicated cooking required.
+            </p>
+            <ul class="feature-list">
+              <li><span class="feature-list-check">✓</span> Affordable high-protein food swaps</li>
+              <li><span class="feature-list-check">✓</span> Easy meal ideas under ₹80/day</li>
+              <li><span class="feature-list-check">✓</span> Hydration & energy protocols</li>
+            </ul>
+          </article>
+
+          <!-- Feature 3: Track Your Progress -->
+          <article class="card feature-card">
+            <div class="feature-icon-box">📈</div>
+            <h3>Track Your Progress</h3>
+            <p>
+              Stay motivated with daily workout streaks, milestone badges, and an integrated BMI calculator 
+              that measures real consistency over perfection.
+            </p>
+            <ul class="feature-list">
+              <li><span class="feature-list-check">✓</span> Visual weekly streak counters</li>
+              <li><span class="feature-list-check">✓</span> Integrated WHO BMI health guide</li>
+              <li><span class="feature-list-check">✓</span> Habit momentum reminders</li>
+            </ul>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. HOW IT WORKS (4 Steps)
+         ========================================================================= -->
+    <section class="section" id="how-it-works" style="background-color: #FFFFFF; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="badge badge-dark">SIMPLE 4-STEP PROCESS</span>
+          <h2>How FitBuddy Works</h2>
+          <p>
+            From zero routine to a disciplined daily habit. Here is how you rebuild your fitness step by step.
+          </p>
+        </div>
+
+        <div class="grid grid-4">
+          
+          <!-- Step 1 -->
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <h3>Create Your Profile</h3>
+            <p>
+              Sign up in under 60 seconds. Tell us whether you are a college student or working professional 
+              and how much daily time you have available.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-card">
+            <div class="step-number">02</div>
+            <h3>Choose Your Goal</h3>
+            <p>
+              Select your primary focus: build strength, burn body fat, improve posture and flexibility, 
+              or simply boost daily physical energy.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <h3>Start Your Workout</h3>
+            <p>
+              Follow clear exercise cues and use the built-in interval timer. Every movement is calibrated 
+              for living rooms, bedrooms, and hostel floors.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step-card">
+            <div class="step-number">04</div>
+            <h3>Track Your Progress</h3>
+            <p>
+              Check off completed workouts, maintain your weekly streak, and celebrate physical milestones 
+              as you rebuild yourself from scratch.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. WORKOUT PREVIEW (Push-ups, Dumbbell Curl, Squats)
+         ========================================================================= -->
+    <section class="section" id="workout-preview">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="badge badge-lime">EXERCISE PREVIEWS</span>
+          <h2>Sample Everyday Home Movements</h2>
+          <p>
+            Here is a sneak peek at fundamental home exercises included in our routine library, 
+            complete with target muscles and recommended repetitions.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          
+          <!-- Exercise 1: Push-ups -->
+          <article class="exercise-card">
+            <div class="exercise-visual" aria-hidden="true">
+              🤸
+            </div>
+            <div class="exercise-body">
+              <div class="exercise-header-meta">
+                <span class="badge badge-lime">CALISTHENICS</span>
+                <span style="font-size: 0.8rem; color: var(--text-dim); font-weight: 600;">Upper Body</span>
+              </div>
+              <h3>Bodyweight Push-ups</h3>
+              <p>
+                The ultimate compound movement for chest, shoulders, and tricep strength with core stabilization.
+              </p>
+              <div class="exercise-specs">
+                <div class="exercise-spec-item">
+                  <span>Target Muscle</span>
+                  <strong>Chest & Triceps</strong>
+                </div>
+                <div class="exercise-spec-item" style="text-align: right;">
+                  <span>Recommended</span>
+                  <strong>3 Sets × 12 Reps</strong>
+                </div>
+              </div>
+              <a href="pages/exercise-details.html" class="btn btn-outline btn-full btn-sm">
+                View Form Technique →
+              </a>
+            </div>
+          </article>
+
+          <!-- Exercise 2: Dumbbell Curl -->
+          <article class="exercise-card">
+            <div class="exercise-visual" aria-hidden="true">
+              💪
+            </div>
+            <div class="exercise-body">
+              <div class="exercise-header-meta">
+                <span class="badge badge-subtle">ISOLATION</span>
+                <span style="font-size: 0.8rem; color: var(--text-dim); font-weight: 600;">Arms</span>
+              </div>
+              <h3>Dumbbell Curl</h3>
+              <p>
+                Classic bicep builder. Can be performed with light dumbbells, resistance bands, or loaded water bottles.
+              </p>
+              <div class="exercise-specs">
+                <div class="exercise-spec-item">
+                  <span>Target Muscle</span>
+                  <strong>Biceps & Forearms</strong>
+                </div>
+                <div class="exercise-spec-item" style="text-align: right;">
+                  <span>Recommended</span>
+                  <strong>3 Sets × 10 Reps</strong>
+                </div>
+              </div>
+              <a href="pages/exercise-details.html" class="btn btn-outline btn-full btn-sm">
+                View Form Technique →
+              </a>
+            </div>
+          </article>
+
+          <!-- Exercise 3: Squats -->
+          <article class="exercise-card">
+            <div class="exercise-visual" aria-hidden="true">
+              🦵
+            </div>
+            <div class="exercise-body">
+              <div class="exercise-header-meta">
+                <span class="badge badge-lime">LOWER BODY</span>
+                <span style="font-size: 0.8rem; color: var(--text-dim); font-weight: 600;">Foundation</span>
+              </div>
+              <h3>Bodyweight Squats</h3>
+              <p>
+                Develops leg drive, hip mobility, and strengthens the quadriceps and glutes for healthy posture.
+              </p>
+              <div class="exercise-specs">
+                <div class="exercise-spec-item">
+                  <span>Target Muscle</span>
+                  <strong>Quads & Glutes</strong>
+                </div>
+                <div class="exercise-spec-item" style="text-align: right;">
+                  <span>Recommended</span>
+                  <strong>3 Sets × 15 Reps</strong>
+                </div>
+              </div>
+              <a href="pages/exercise-details.html" class="btn btn-outline btn-full btn-sm">
+                View Form Technique →
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Link to Full Catalog -->
+        <div style="text-align: center; margin-top: var(--space-2xl);">
+          <a href="pages/workouts.html" class="btn btn-secondary btn-lg">
+            Browse All 50+ Home Workouts →
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. ABOUT / PERSONA SPOTLIGHT SECTION
+         ========================================================================= -->
+    <section class="section" id="about" style="background-color: #FFFFFF; border-top: 1px solid var(--border-subtle);">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="badge badge-lime">WHO IT'S FOR</span>
+          <h2>Tailored for Students and Working Professionals</h2>
+          <p>
+            Commercial gym programs expect 2 hours every day and expensive supplements. 
+            FitBuddy is built around realistic schedules.
+          </p>
+        </div>
+
+        <div class="grid grid-2">
+          
+          <!-- Student Card -->
+          <div class="card" style="border-left: 4px solid var(--primary-accent);">
+            <div style="font-size: 1.8rem; margin-bottom: var(--space-xs);">🎓</div>
+            <h3>College & University Students</h3>
+            <p style="margin: var(--space-xs) 0 var(--space-md) 0;">
+              No budget for gym memberships? Irregular exam schedules? FitBuddy provides quick 15-minute 
+              dorm routines that improve cognitive focus, alleviate exam stress, and cost ₹0 in gym fees.
+            </p>
+            <ul class="feature-list" style="margin-bottom: var(--space-lg);">
+              <li><span class="feature-list-check">✓</span> Zero equipment calisthenics</li>
+              <li><span class="feature-list-check">✓</span> Hostel mess budget protein hacks</li>
+              <li><span class="feature-list-check">✓</span> Quick stress relief breaks</li>
+            </ul>
+            <a href="pages/register.html" class="btn btn-outline btn-sm">Join as Student →</a>
+          </div>
+
+          <!-- Professional Card -->
+          <div class="card" style="border-left: 4px solid var(--forest-dark);">
+            <div style="font-size: 1.8rem; margin-bottom: var(--space-xs);">💼</div>
+            <h3>Desk Workers & Professionals</h3>
+            <p style="margin: var(--space-xs) 0 var(--space-md) 0;">
+              Sitting 8+ hours in front of screens causes rounded shoulders, tight hips, and lower back aches. 
+              Our spine mobility and HIIT micro-workouts keep you healthy and sharp.
+            </p>
+            <ul class="feature-list" style="margin-bottom: var(--space-lg);">
+              <li><span class="feature-list-check">✓</span> Spine decompression & posture flows</li>
+              <li><span class="feature-list-check">✓</span> 20-minute morning fat-burn sessions</li>
+              <li><span class="feature-list-check">✓</span> Anti-slump midday energy boosts</li>
+            </ul>
+            <a href="pages/register.html" class="btn btn-outline btn-sm">Join as Professional →</a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. FINAL CALL TO ACTION (CTA)
+         ========================================================================= -->
+    <section class="section">
+      <div class="container">
+        
+        <div class="cta-box">
+          <span class="badge badge-lime" style="margin-bottom: var(--space-sm);">START TODAY FOR FREE</span>
+          <h2>Ready to Rebuild Yourself from Scratch?</h2>
+          <p>
+            Create your personalized fitness profile now. No credit card required, 
+            no gym equipment needed. Take control of your daily health starting today.
+          </p>
+          <div>
+            <a href="pages/register.html" class="btn btn-primary btn-lg">
+              Create Your Fitness Profile →
+            </a>
+          </div>
+          <div style="margin-top: var(--space-md); font-size: 0.82rem; color: #94A89E;">
+            Instant access • 100% Free core workouts • Built for students & workers
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       8. FOOTER WITH DISCLAIMER
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container">
+      
+      <div class="footer-grid">
+        
+        <!-- Brand Info -->
+        <div>
+          <a href="index.html" class="brand">
+            <span class="brand-symbol">⚡</span>
+            <span>FitBuddy</span>
+          </a>
+          <p class="footer-brand-desc">
+            <strong>"REBUILD YOURSELF FROM SCRATCH."</strong><br>
+            A dedicated home fitness platform designed for students and working professionals.
+          </p>
+        </div>
+
+        <!-- Navigation Links -->
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#workout-preview">Workouts Preview</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#about">About FitBuddy</a></li>
+            <li><a href="pages/workouts.html">Full Catalog</a></li>
+          </ul>
+        </div>
+
+        <!-- Tools & Features -->
+        <div>
+          <h4 class="footer-col-title">Tools & Features</h4>
+          <ul class="footer-links">
+            <li><a href="pages/bmi.html">BMI Calculator</a></li>
+            <li><a href="pages/workout-timer.html">Workout Timer</a></li>
+            <li><a href="pages/diet.html">Nutrition Guides</a></li>
+            <li><a href="pages/progress.html">Streak Tracker</a></li>
+          </ul>
+        </div>
+
+        <!-- Account -->
+        <div>
+          <h4 class="footer-col-title">Account</h4>
+          <ul class="footer-links">
+            <li><a href="pages/register.html">Get Started Free</a></li>
+            <li><a href="pages/login.html">Login</a></li>
+            <li><a href="pages/profile-setup.html">Profile Setup</a></li>
+            <li><a href="pages/dashboard.html">Member Dashboard</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Fitness Information Disclaimer -->
+      <div class="footer-disclaimer">
+        <strong>Medical & Health Disclaimer:</strong> FitBuddy provides general physical exercise, home calisthenics, and nutritional information for educational and motivational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult your physician or a qualified healthcare provider before beginning any new exercise or wellness program, especially if you have pre-existing cardiovascular, musculoskeletal, or metabolic conditions.
+      </div>
+
+      <!-- Copyright & Bottom Line -->
+      <div class="footer-bottom">
+        <div>
+          © <span class="current-year">2026</span> FitBuddy. All rights reserved.
+        </div>
+        <div>
+          Crafted with HTML, CSS & Vanilla JavaScript
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

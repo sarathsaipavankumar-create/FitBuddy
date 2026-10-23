@@ -1,0 +1,267 @@
+/* ==========================================================================
+   FitBuddy - Responsive Layout Stylesheet
+   Ensures seamless experience across Desktop, Tablet, and Mobile screens
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Medium Screens & Tablets (<= 992px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .hero-content {
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-stats-row {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .hero-image-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Small Tablets & Mobile Devices (<= 768px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  :root {
+    --header-height: 68px;
+    --space-4xl: 3.5rem;
+    --space-3xl: 2.5rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* Mobile Slide-down Dropdown Menu */
+  .nav-menu {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid var(--border-subtle);
+    flex-direction: column;
+    padding: var(--space-lg);
+    gap: var(--space-md);
+    align-items: stretch;
+    box-shadow: var(--shadow-dropdown);
+    transform: translateY(-130%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+    z-index: 999;
+  }
+
+  .nav-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-link {
+    font-size: 1.05rem;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .nav-link.active::after {
+    display: none;
+  }
+
+  /* Desktop Header Actions hidden on mobile, placed inside mobile menu */
+  .header .nav-actions {
+    display: none;
+  }
+
+  .nav-menu .mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-floating-badge {
+    position: static;
+    margin-top: var(--space-md);
+    box-shadow: var(--shadow-subtle);
+    justify-content: center;
+  }
+
+  .hero-stats-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Small Mobile Devices (<= 480px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 480px) {
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .card {
+    padding: var(--space-lg);
+  }
+
+  .cta-box {
+    padding: var(--space-2xl) var(--space-md);
+  }
+
+  .container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Dashboard Mobile Navigation & Layout Rules (<= 992px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 992px) {
+  .dashboard-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1050;
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-dropdown);
+  }
+
+  .dashboard-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close-btn {
+    display: flex;
+  }
+
+  .dashboard-menu-btn {
+    display: flex;
+  }
+
+  .dashboard-topbar {
+    padding: 0 var(--space-md);
+  }
+
+  .dashboard-body {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .dash-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dash-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dash-quick-links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .filter-grid-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .exercise-detail-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .progress-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .progress-charts-grid {
+    grid-template-columns: 1fr;
+  }
+  .progress-form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .sub-plan-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .progress-stat-grid {
+    grid-template-columns: 1fr;
+  }
+  .progress-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .weekly-day-circle {
+    width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
+  }
+  .profile-edit-grid {
+    grid-template-columns: 1fr;
+  }
+  .profile-overview-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .profile-live-bmi-card {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+

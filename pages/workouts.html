@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore FitBuddy's comprehensive exercise catalogue. Filter by category, target body part, available equipment, and fitness goal.">
+  <title>Workout Catalogue — FitBuddy</title>
+
+  <!-- Google Fonts: Manrope (Headings) and Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core CSS Stylesheets (Relative paths from /pages/) -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body style="background-color: var(--bg-page);">
+
+  <!-- =========================================================================
+       1. HEADER & NAVIGATION BAR
+       ========================================================================= -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="../index.html" class="brand" aria-label="FitBuddy Home">
+        <span class="brand-symbol">⚡</span>
+        <span>FitBuddy</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="workouts.html" class="nav-link active" aria-current="page">Workouts</a>
+        <a href="bmi.html" class="nav-link">BMI</a>
+        <a href="diet.html" class="nav-link">Diet</a>
+        <a href="progress.html" class="nav-link">Progress</a>
+      </nav>
+
+      <!-- Nav Action -->
+      <div class="nav-actions">
+        <a href="workout-timer.html" class="btn btn-outline btn-sm">⏱️ Open Timer</a>
+        <a href="dashboard.html" class="btn btn-primary btn-sm">Member Dashboard</a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. WORKOUT CATALOGUE HERO & PERSONALIZATION FILTERS
+       ========================================================================= -->
+  <main class="section" style="padding-top: var(--space-3xl); padding-bottom: var(--space-4xl);">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="section-header" style="margin-bottom: var(--space-2xl);">
+        <span class="badge badge-lime">SCIENCE-BASED EXERCISE CATALOGUE</span>
+        <h1 style="margin-top: var(--space-xs); font-size: clamp(2rem, 4.5vw, 2.7rem);">
+          Home & Hostel Exercise Library
+        </h1>
+        <p>
+          Master compound bodyweight movements and dumbbell mechanics. Calibrated for dorm spaces, apartment living, and busy academic schedules.
+        </p>
+      </div>
+
+      <!-- Personalized Profile Sync Notice (Shown dynamically if saved profile exists) -->
+      <div id="profileSyncBanner" class="auth-stage-notice" style="display: none; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-md); margin-bottom: var(--space-xl); background-color: #FFFFFF; border: 1.5px solid var(--border-subtle); padding: var(--space-md) var(--space-lg); border-radius: var(--radius-md);">
+        <div style="display: flex; align-items: center; gap: var(--space-sm);">
+          <span style="font-size: 1.3rem;">⚡</span>
+          <div id="profileSyncText" style="font-size: 0.92rem; color: var(--text-main);">
+            Personalized from your saved profile preferences.
+          </div>
+        </div>
+        <div style="display: flex; gap: var(--space-xs);">
+          <button id="reSyncProfileBtn" class="btn btn-outline btn-sm">
+            Sync My Profile
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills Navigation -->
+      <nav class="category-filter-nav" id="categoryPillNav" aria-label="Exercise Categories">
+        <!-- Rendered dynamically by workouts.js from EXERCISE_CATEGORIES -->
+      </nav>
+
+      <!-- Advanced Personalization Filter Bar -->
+      <section class="catalogue-filter-bar" aria-label="Exercise Personalization Filters">
+        <div class="filter-grid-row">
+          
+          <!-- Filter 1: Search by Name / Muscle -->
+          <div class="filter-search-wrap">
+            <span class="filter-search-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <input 
+              type="text" 
+              id="filterSearchInput" 
+              class="filter-search-input" 
+              placeholder="Search exercise or muscle..." 
+              aria-label="Search exercises"
+            >
+          </div>
+
+          <!-- Filter 2: Target Body Part -->
+          <div>
+            <label for="filterBodyPart" style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">
+              Body Part
+            </label>
+            <select id="filterBodyPart" class="filter-select" aria-label="Filter by Target Body Part">
+              <option value="All">All Body Parts</option>
+              <option value="Chest">Chest</option>
+              <option value="Back">Back</option>
+              <option value="Biceps">Biceps</option>
+              <option value="Triceps">Triceps</option>
+              <option value="Shoulders">Shoulders</option>
+              <option value="Abs">Abs & Core</option>
+              <option value="Legs">Legs & Calves</option>
+              <option value="Full Body">Full Body</option>
+              <option value="Warm-up">Warm-up Flow</option>
+            </select>
+          </div>
+
+          <!-- Filter 3: Available Equipment -->
+          <div>
+            <label for="filterEquipment" style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">
+              Equipment
+            </label>
+            <select id="filterEquipment" class="filter-select" aria-label="Filter by Available Equipment">
+              <option value="All">All Equipment</option>
+              <option value="No Equipment">No Equipment (Bodyweight)</option>
+              <option value="Dumbbells">Dumbbells</option>
+            </select>
+          </div>
+
+          <!-- Filter 4: Experience Level -->
+          <div>
+            <label for="filterExperience" style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">
+              Difficulty
+            </label>
+            <select id="filterExperience" class="filter-select" aria-label="Filter by Difficulty Level">
+              <option value="All">All Levels</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+          </div>
+
+          <!-- Filter 5: Fitness Goal -->
+          <div>
+            <label for="filterGoal" style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px;">
+              Fitness Goal
+            </label>
+            <select id="filterGoal" class="filter-select" aria-label="Filter by Fitness Goal">
+              <option value="All">All Goals</option>
+              <option value="Muscle Gain">Muscle Gain</option>
+              <option value="Weight Management">Weight Management</option>
+              <option value="Strength">Strength</option>
+              <option value="General Fitness">General Fitness</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Filter Summary Row -->
+        <div class="filter-summary-row">
+          <div style="display: flex; align-items: center; gap: var(--space-sm);">
+            <span id="exerciseCountBadge" class="badge badge-lime" style="font-size: 0.75rem;">
+              Loading exercises...
+            </span>
+            <span style="color: var(--text-dim); font-size: 0.82rem;">
+              Click any card to inspect full step-by-step form cues.
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: var(--space-md);">
+            <!-- Duration Filter -->
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <label for="filterDuration" style="font-size: 0.82rem; font-weight: 600; color: var(--text-dim);">
+                Duration:
+              </label>
+              <select id="filterDuration" class="filter-select" style="padding: 4px 8px; font-size: 0.8rem; width: auto;" aria-label="Filter by Workout Duration">
+                <option value="All">Any Duration</option>
+                <option value="15">15 Mins</option>
+                <option value="30">30 Mins</option>
+                <option value="45">45 Mins</option>
+                <option value="60">60 Mins</option>
+              </select>
+            </div>
+
+            <button id="resetFiltersBtn" class="btn btn-ghost btn-sm" style="color: var(--text-dim);">
+              Reset Filters ↺
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           3. DYNAMIC EXERCISE CARDS GRID
+           ===================================================================== -->
+      <section id="exerciseGridContainer" class="grid grid-3" aria-label="Exercise Cards Grid">
+        <!-- Rendered dynamically by workouts.js from EXERCISES -->
+      </section>
+
+      <!-- Friendly Empty State if filters return zero results -->
+      <div id="catalogueEmptyState" class="dashboard-empty-card" style="display: none; text-align: center; margin-top: var(--space-xl);" aria-label="No Exercises Found">
+        <div style="margin: 0 auto; max-width: 500px; padding: var(--space-lg) 0;">
+          <div class="dashboard-empty-icon" style="margin: 0 auto var(--space-md) auto;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+          <h3 style="font-size: 1.3rem; margin-bottom: var(--space-xs);">No Exercises Match Your Current Filters</h3>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: var(--space-lg);">
+            Try selecting "All Equipment" or clearing your search term to view the full library of 20+ home and hostel routines.
+          </p>
+          <button class="btn btn-primary" onclick="resetAllFilters()">
+            Reset All Filters ↺
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       4. FOOTER
+       ========================================================================= -->
+  <footer class="footer" style="background-color: #FFFFFF; border-top: 1px solid var(--border-subtle); padding: var(--space-2xl) 0;">
+    <div class="container footer-bottom">
+      <div style="font-size: 0.9rem; color: var(--text-dim);">
+        © <span class="current-year">2026</span> FitBuddy. Zero-Equipment & Home Calisthenics Prototype.
+      </div>
+      <div style="display: flex; gap: var(--space-lg); font-size: 0.9rem;">
+        <a href="dashboard.html" style="color: var(--forest-dark); font-weight: 600;">Member Dashboard</a>
+        <a href="workout-timer.html" style="color: var(--forest-dark); font-weight: 600;">Workout Timer</a>
+        <a href="../index.html" style="color: var(--text-dim);">Landing Page</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FitBuddy JavaScript Files -->
+  <script src="../js/app.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/exercise-data.js"></script>
+  <script src="../js/workouts.js"></script>
+</body>
+</html>
