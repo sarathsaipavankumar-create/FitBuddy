@@ -68,9 +68,17 @@ Copy-Item -Path "$RootDir\frontend\*" -Destination "$BuildDir\assets" -Recurse -
 # Create minimal resources
 $ResDir = "$BuildDir\res"
 New-Item -ItemType Directory -Path "$ResDir\values" -Force | Out-Null
-New-Item -ItemType Directory -Path "$ResDir\mipmap" -Force | Out-Null
+New-Item -ItemType Directory -Path "$ResDir\drawable" -Force | Out-Null
 
-Copy-Item -Path "$RootDir\frontend\assets\icons\app-icon.jpg" -Destination "$ResDir\mipmap\ic_launcher.jpg" -Force
+$PngIcon = Join-Path $RootDir "frontend\assets\icons\app-icon.png"
+if (-not (Test-Path $PngIcon)) {
+    Add-Type -AssemblyName System.Drawing
+    $img = [System.Drawing.Image]::FromFile("$RootDir\frontend\assets\icons\app-icon.jpg")
+    $img.Save($PngIcon, [System.Drawing.Imaging.ImageFormat]::Png)
+    $img.Dispose()
+}
+
+Copy-Item -Path $PngIcon -Destination "$ResDir\drawable\ic_launcher.png" -Force
 
 Set-Content -Path "$ResDir\values\strings.xml" -Value @"
 <resources>
@@ -87,7 +95,7 @@ Set-Content -Path $ManifestFile -Value @"
     android:versionCode="1"
     android:versionName="1.0.0">
 
-    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
+    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="33" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -95,7 +103,9 @@ Set-Content -Path $ManifestFile -Value @"
 
     <application
         android:label="@string/app_name"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher"
+        android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         <activity
@@ -205,18 +215,20 @@ Write-Host "       Bundling classes.dex into APK..." -ForegroundColor Cyan
 & $JarExe -uf $UnsignedApk -C "$BuildDir\dex" classes.dex
 if ($LASTEXITCODE -ne 0) { throw "jar failed to insert classes.dex!" }
 
-# 6. Sign the APK with debug keystore
-Write-Host "[6/6] Signing APK with Android debug keystore..." -ForegroundColor Cyan
+# 6. Sign the APK with APK Signature Scheme v1, v2, and v3 using Google apksig
+Write-Host "[6/6] Signing APK with Google APK Signature Scheme v1, v2 & v3..." -ForegroundColor Cyan
 $Keystore = Join-Path $ToolsDir "debug.keystore"
 if (-not (Test-Path $Keystore)) {
     & $KeytoolExe -genkeypair -v -keystore $Keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=FitBuddy, OU=Mobile, O=FitBuddy, L=FitCity, S=FitState, C=US"
 }
 
-Copy-Item -Path $UnsignedApk -Destination $OutApk -Force
+$ApksigJar = Join-Path $ToolsDir "apksig.jar"
+$SignApkSrc = Join-Path $ToolsDir "SignApk.java"
+& javac -cp $ApksigJar $SignApkSrc
+if ($LASTEXITCODE -ne 0) { throw "SignApk compilation failed!" }
 
-# Sign using jarsigner
-& $JarsignerExe -sigalg SHA256withRSA -digestalg SHA-256 -keystore $Keystore -storepass android -keypass android $OutApk androiddebugkey
-if ($LASTEXITCODE -ne 0) { throw "jarsigner failed!" }
+& java -cp "$ToolsDir;$ApksigJar" SignApk $Keystore "android" "androiddebugkey" $UnsignedApk $OutApk
+if ($LASTEXITCODE -ne 0) { throw "ApkSigner failed!" }
 
 Write-Host "`n==========================================================" -ForegroundColor Green
 Write-Host "       APK GENERATION SUCCESSFUL!                         " -ForegroundColor Green
