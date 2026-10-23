@@ -1,0 +1,252 @@
+/* ==========================================================================
+   FitBuddy - Main Styles & Design System
+   Visual Style:
+   - Light off-white background: #F6F8F5
+   - Dark forest/navy text: #17251F
+   - Lime green accent: #B9F36A
+   - White cards with subtle gray borders & soft shadows
+   - Typography: Manrope (headings) & Inter (body text)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design System Tokens (CSS Custom Properties)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand Palette */
+  --bg-page: #F6F8F5;              /* Light off-white background */
+  --bg-card: #FFFFFF;              /* Pure white cards */
+  --bg-card-subtle: #EEF2EB;       /* Slightly shaded card / tag background */
+  
+  --text-main: #17251F;            /* Dark forest / navy primary text */
+  --text-muted: #4B5A53;           /* Secondary balanced readable text */
+  --text-dim: #7B8A83;             /* Captions & subtle annotations */
+  
+  --primary-accent: #B9F36A;       /* Brand lime green accent */
+  --primary-accent-hover: #A5E44F; /* Darker lime on hover */
+  --primary-accent-subtle: #E8FBCF;/* Soft tinted lime for badges */
+  
+  --forest-dark: #17251F;          /* Contrast button / badge dark forest */
+  --forest-dark-hover: #22372E;
+  
+  /* Borders & Dividers */
+  --border-subtle: #E4E8E2;        /* Subtle gray border */
+  --border-medium: #D1D8CE;        /* Interactive border */
+  --border-focus: #17251F;
+  
+  /* Typography */
+  --font-headings: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Spacing Scale */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 6rem;
+  
+  /* Border Radii (12px to 18px as requested) */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-card: 16px;
+  --radius-lg: 18px;
+  --radius-full: 9999px;
+  
+  /* Soft Shadows Only Where Appropriate */
+  --shadow-subtle: 0 2px 8px rgba(23, 37, 31, 0.03);
+  --shadow-card: 0 6px 20px rgba(23, 37, 31, 0.05);
+  --shadow-hover: 0 12px 28px rgba(23, 37, 31, 0.08);
+  --shadow-dropdown: 0 16px 36px rgba(23, 37, 31, 0.12);
+  
+  /* Layout Dimensions */
+  --max-width: 1180px;
+  --header-height: 74px;
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Base Typography
+   -------------------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
+  color: var(--text-main);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: clamp(2.3rem, 5.2vw, 3.8rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.8vw, 2.6rem);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+a {
+  color: var(--forest-dark);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+a:hover {
+  color: #0b1310;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--forest-dark);
+  outline-offset: 3px;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   3. Layout Containers & Grid System
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+}
+
+.section {
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 660px;
+  margin: 0 auto var(--space-3xl) auto;
+}
+
+.section-header .badge {
+  margin-bottom: var(--space-sm);
+}
+
+.section-header h2 {
+  margin-bottom: var(--space-sm);
+}
+
+.section-header p {
+  font-size: 1.05rem;
+}
+
+/* Flexbox Helpers */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Subtle Accent Highlight */
+.highlight-lime {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.highlight-lime::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: -2px;
+  right: -2px;
+  height: 12px;
+  background-color: var(--primary-accent);
+  z-index: -1;
+  border-radius: 4px;
+}
