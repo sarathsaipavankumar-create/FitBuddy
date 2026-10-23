@@ -1,0 +1,18 @@
+{
+  "name": "FitBuddy - Fitness & Wellness",
+  "short_name": "FitBuddy",
+  "description": "Your all-in-one workout tracker, diet planner, and fitness companion.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0a0e17",
+  "theme_color": "#00f2fe",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/assets/icons/app-icon.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
