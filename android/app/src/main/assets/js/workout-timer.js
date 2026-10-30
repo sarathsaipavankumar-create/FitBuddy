@@ -566,8 +566,25 @@ function completeEntireWorkout() {
   if (compSets) compSets.textContent = `${totalCompletedSets || (workoutList.length * 3)} Sets`;
   if (compTime) compTime.textContent = `${elapsedMinutes} Mins`;
 
+  // Log to Spring Boot backend & MySQL database
+  if (window.FitBuddyApi && window.FitBuddyApi.isLoggedIn()) {
+    const routineName = (workoutList.length > 0 && workoutList[0].name) ? (workoutList[0].name + ' Routine') : 'Home Workout Session';
+    window.FitBuddyApi.logWorkout({
+      workoutName: routineName,
+      durationMinutes: elapsedMinutes,
+      exercisesCompleted: workoutList.length,
+      setsCompleted: totalCompletedSets || (workoutList.length * 3),
+      caloriesBurned: Math.round(elapsedMinutes * 7.5),
+      notes: 'Completed via FitBuddy Workout Timer'
+    }).then(() => {
+      console.log('Workout logged successfully to server database');
+    }).catch(err => {
+      console.warn('Backend workout log deferred:', err);
+    });
+  }
+
   if (typeof showToast === 'function') {
-    showToast('Congratulations! Full routine completed.', 'success', 5000);
+    showToast('Congratulations! Full routine completed and recorded.', 'success', 5000);
   }
 }
 

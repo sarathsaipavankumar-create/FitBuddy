@@ -247,11 +247,19 @@ function handleLiveRecalculation(profile) {
   profile.height = newHeight;
   profile.weight = newWeight;
 
-  // Persist updated values in demo sessionStorage
+  // Persist updated values in storage
   try {
     sessionStorage.setItem('fitbuddy_demo_profile_data', JSON.stringify(profile));
+    localStorage.setItem('fitbuddy_demo_profile_data', JSON.stringify(profile));
   } catch (err) {
-    console.warn('Could not update demo profile in sessionStorage:', err);
+    console.warn('Could not update profile in storage:', err);
+  }
+
+  // Persist to Spring Boot backend
+  if (window.FitBuddyApi && window.FitBuddyApi.isLoggedIn()) {
+    window.FitBuddyApi.logBmi({ height: newHeight, weight: newWeight }).catch(err => {
+      console.warn('Backend BMI log deferred:', err);
+    });
   }
 
   // Re-render UI

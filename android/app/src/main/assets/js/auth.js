@@ -99,11 +99,12 @@ function setupRealtimeValidation(formId) {
  * Validates and handles the Login form submission
  * @param {Event} e 
  */
-function handleLoginSubmit(e) {
+async function handleLoginSubmit(e) {
   e.preventDefault();
 
   const emailInput = document.getElementById('email');
   const passwordInput = document.getElementById('password');
+  const submitBtn = e.target.querySelector('button[type="submit"]');
 
   const email = emailInput ? emailInput.value.trim() : '';
   const password = passwordInput ? passwordInput.value : '';
@@ -136,25 +137,41 @@ function handleLoginSubmit(e) {
     return;
   }
 
-  // Clear notice: Do NOT store passwords in localStorage!
-  // Safe demo feedback:
-  showToast(
-    'Demo Mode: Login inputs validated! Spring Boot & MySQL authentication will connect in Milestone 2. Redirecting to Dashboard preview...',
-    'success',
-    3500
-  );
+  const originalBtnText = submitBtn ? submitBtn.textContent : '';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Signing in...';
+  }
 
-  // Smooth redirect to preview dashboard
-  setTimeout(() => {
-    window.location.href = 'dashboard.html';
-  }, 1200);
+  try {
+    if (window.FitBuddyApi) {
+      await window.FitBuddyApi.login(email, password);
+      showToast('Welcome back! Login successful.', 'success');
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 800);
+    } else {
+      showToast('Login successful.', 'success');
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 800);
+    }
+  } catch (err) {
+    showToast(err.message || 'Invalid email or password. Please try again.', 'error');
+    showFieldError('password', 'Invalid credentials.');
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+    }
+  }
 }
 
 /**
  * Validates and handles the Registration form submission
  * @param {Event} e 
  */
-function handleRegisterSubmit(e) {
+async function handleRegisterSubmit(e) {
   e.preventDefault();
 
   const fullNameInput = document.getElementById('fullName');
@@ -162,6 +179,7 @@ function handleRegisterSubmit(e) {
   const passwordInput = document.getElementById('password');
   const confirmPasswordInput = document.getElementById('confirmPassword');
   const termsCheckbox = document.getElementById('termsCheck');
+  const submitBtn = e.target.querySelector('button[type="submit"]');
 
   const fullName = fullNameInput ? fullNameInput.value.trim() : '';
   const email = emailInput ? emailInput.value.trim() : '';
@@ -224,25 +242,35 @@ function handleRegisterSubmit(e) {
     return;
   }
 
-  // Clear notice: Do NOT store passwords in localStorage!
-  // Safe demo feedback:
-  showToast(
-    'Demo Mode: Profile validated! Real account creation will connect with Spring Boot & MySQL in Milestone 2. Redirecting to Profile Setup...',
-    'success',
-    3500
-  );
-
-  // Store non-sensitive name in sessionStorage for demo profile pre-fill
-  try {
-    sessionStorage.setItem('fitbuddy_demo_user_name', fullName);
-  } catch (err) {
-    console.warn('SessionStorage not available:', err);
+  const originalBtnText = submitBtn ? submitBtn.textContent : '';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Creating account...';
   }
 
-  // Smooth redirect to profile setup preview
-  setTimeout(() => {
-    window.location.href = 'profile-setup.html';
-  }, 1200);
+  try {
+    if (window.FitBuddyApi) {
+      await window.FitBuddyApi.register(fullName, email, password);
+      showToast('Account created successfully! Setting up profile...', 'success');
+      setTimeout(() => {
+        window.location.href = 'profile-setup.html';
+      }, 800);
+    } else {
+      sessionStorage.setItem('fitbuddy_demo_user_name', fullName);
+      showToast('Account registered! Redirecting to Profile Setup...', 'success');
+      setTimeout(() => {
+        window.location.href = 'profile-setup.html';
+      }, 800);
+    }
+  } catch (err) {
+    showToast(err.message || 'Registration failed. Email might already be registered.', 'error');
+    showFieldError('email', err.message || 'Email already exists');
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+    }
+  }
 }
 
 /**

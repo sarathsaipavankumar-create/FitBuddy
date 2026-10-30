@@ -12,12 +12,12 @@
 
 let weeklyChartInstance = null;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   // 1. Initialize desktop and mobile sidebar navigation drawer
   initDashboardSidebar();
 
   // 2. Load and render user profile data or friendly empty state
-  loadDashboardData();
+  await loadDashboardData();
 });
 
 /**
@@ -96,8 +96,36 @@ function getSavedProfile() {
  * Main dashboard coordinator: Checks for saved profile data and renders either
  * the personalized profile view or the friendly empty state view.
  */
-function loadDashboardData() {
-  const profile = getSavedProfile();
+async function loadDashboardData() {
+  let profile = getSavedProfile();
+
+  if (window.FitBuddyApi && window.FitBuddyApi.isLoggedIn()) {
+    try {
+      const user = window.FitBuddyApi.getCurrentUser();
+      const profRes = await window.FitBuddyApi.getProfile();
+      const statsRes = await window.FitBuddyApi.getDashboardStats();
+
+      if (profRes && profRes.data) {
+        profile = {
+          ...(profile || {}),
+          ...profRes.data,
+          name: (user && user.fullName) || (profile && profile.name) || 'Member'
+        };
+      }
+
+      if (statsRes && statsRes.data) {
+        const stats = statsRes.data;
+        if (stats.currentWeight) profile.weight = stats.currentWeight;
+        if (stats.currentBmi) profile.bmi = stats.currentBmi;
+        profile.totalWorkouts = stats.totalWorkouts;
+        profile.streak = stats.streakDays;
+        profile.totalMinutes = stats.totalMinutes;
+        profile.totalCalories = stats.totalCalories;
+      }
+    } catch (e) {
+      console.warn('Dashboard live sync deferred:', e);
+    }
+  }
 
   if (profile) {
     renderPersonalizedDashboard(profile);
@@ -250,13 +278,20 @@ function renderPersonalizedDashboard(profile) {
   }
 
   // 7. Completed Workouts
-  if (completedCountEl) completedCountEl.textContent = '4 Sessions';
+  const count = (profile.totalWorkouts !== undefined) ? profile.totalWorkouts : 4;
+  if (completedCountEl) completedCountEl.textContent = `${count} ${count === 1 ? 'Session' : 'Sessions'}`;
   if (completedSourceBadge) {
     completedSourceBadge.textContent = 'Personalized';
     completedSourceBadge.className = 'dash-data-badge badge badge-lime';
   }
   if (completedSubtextEl) {
-    completedSubtextEl.textContent = '4 of 5 weekly workout targets completed';
+    const streak = profile.streak !== undefined ? profile.streak : 4;
+    const mins = profile.totalMinutes !== undefined ? profile.totalMinutes : 120;
+    completedSubtextEl.textContent = `${streak}-day streak • ${mins} mins logged`;
+  }
+  if (chartStreakBadge) {
+    const streak = profile.streak !== undefined ? profile.streak : 4;
+    chartStreakBadge.textContent = `🔥 ${streak} Day Streak`;
   }
 
   // 8. Customized Today's Recommended Workout

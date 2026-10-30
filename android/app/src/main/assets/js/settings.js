@@ -190,35 +190,42 @@ function bindSettingsEvents() {
 }
 
 /**
- * Handles frontend demo session sign-out
- * Clears demo state and displays security explanation
+ * Handles account sign-out
+ * Clears authentication token and redirects to login
  */
-function handleSignout() {
-  const confirmed = window.confirm(
-    'Are you sure you want to sign out of this FitBuddy demo session?\n\n' +
-    'Note: This is a frontend demo session reset. In a production environment, ' +
-    'this call securely invalidates server-side session tokens and HTTP-only cookies via Spring Boot.'
-  );
-
+async function handleSignout() {
+  const confirmed = window.confirm('Are you sure you want to sign out of your FitBuddy account?');
   if (!confirmed) return;
 
-  // Clear demo session storage keys
+  if (window.FitBuddyApi) {
+    try {
+      await window.FitBuddyApi.logout();
+    } catch (e) {
+      console.warn('Logout request failed:', e);
+    }
+  }
+
+  // Clear session storage and auth keys
   try {
     sessionStorage.removeItem('fitbuddy_demo_profile_data');
     sessionStorage.removeItem('fitbuddy_completed_workouts');
     sessionStorage.removeItem('fitbuddy_demo_user_name');
+    sessionStorage.removeItem('fitbuddy_auth_token');
+    sessionStorage.removeItem('fitbuddy_user');
+    localStorage.removeItem('fitbuddy_auth_token');
+    localStorage.removeItem('fitbuddy_user');
   } catch (err) {
-    console.warn('Could not clear sessionStorage on sign-out:', err);
+    console.warn('Could not clear storage on sign-out:', err);
   }
 
   if (typeof showToast === 'function') {
-    showToast('Signed out of demo session. Redirecting to home...', 'info', 3000);
+    showToast('Signed out successfully. Redirecting to login...', 'info', 2000);
   }
 
-  // Redirect to home page
+  // Redirect to login page
   setTimeout(() => {
-    window.location.href = '../index.html';
-  }, 1200);
+    window.location.href = 'login.html';
+  }, 800);
 }
 
 // Global exposure

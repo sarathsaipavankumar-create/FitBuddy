@@ -25,9 +25,19 @@ document.addEventListener('DOMContentLoaded', () => {
  * Checks if a name was stored in sessionStorage during registration
  * and pre-fills it into the name input.
  */
-function prefillRegisteredName() {
+async function prefillRegisteredName() {
   const nameInput = document.getElementById('name');
   if (!nameInput) return;
+
+  if (window.FitBuddyApi && window.FitBuddyApi.isLoggedIn()) {
+    try {
+      const user = window.FitBuddyApi.getCurrentUser();
+      if (user && user.fullName) {
+        nameInput.value = user.fullName;
+        return;
+      }
+    } catch (e) {}
+  }
 
   try {
     const savedName = sessionStorage.getItem('fitbuddy_demo_user_name');
@@ -61,7 +71,7 @@ function setupRealtimeProfileValidation() {
  * Validates the profile form fields and navigates to bmi.html
  * @param {Event} e 
  */
-function handleProfileSubmit(e) {
+async function handleProfileSubmit(e) {
   e.preventDefault();
 
   // Extract Form Input Values
@@ -146,11 +156,33 @@ function handleProfileSubmit(e) {
     updatedAt: new Date().toISOString()
   };
 
-  // Save to demo sessionStorage (no passwords stored)
+  // Cache in storage
   try {
     sessionStorage.setItem('fitbuddy_demo_profile_data', JSON.stringify(profileData));
+    localStorage.setItem('fitbuddy_demo_profile_data', JSON.stringify(profileData));
   } catch (err) {
-    console.warn('Could not save demo profile data to sessionStorage:', err);
+    console.warn('Could not save profile data to storage:', err);
+  }
+
+  // Save to Spring Boot & MySQL backend
+  if (window.FitBuddyApi && window.FitBuddyApi.isLoggedIn()) {
+    try {
+      await window.FitBuddyApi.updateProfile({
+        age,
+        gender,
+        height,
+        weight,
+        activityLevel,
+        fitnessGoal,
+        equipment,
+        dietPreference,
+        workoutExperience,
+        workoutDuration
+      });
+      await window.FitBuddyApi.logBmi({ height, weight });
+    } catch (err) {
+      console.warn('Backend profile update deferred:', err);
+    }
   }
 
   // Display friendly feedback

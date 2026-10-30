@@ -62,8 +62,8 @@ New-Item -ItemType Directory -Path "$BuildDir\classes" -Force | Out-Null
 New-Item -ItemType Directory -Path "$BuildDir\dex" -Force | Out-Null
 New-Item -ItemType Directory -Path "$BuildDir\assets" -Force | Out-Null
 
-# Copy web frontend assets
-Copy-Item -Path "$RootDir\frontend\*" -Destination "$BuildDir\assets" -Recurse -Force
+# Copy web frontend assets (excluding any preexisting APKs)
+Get-ChildItem -Path "$RootDir\frontend\*" -Exclude "*.apk" | Copy-Item -Destination "$BuildDir\assets" -Recurse -Force
 
 # Create minimal resources
 $ResDir = "$BuildDir\res"
@@ -106,6 +106,7 @@ Set-Content -Path $ManifestFile -Value @"
         android:icon="@drawable/ic_launcher"
         android:roundIcon="@drawable/ic_launcher"
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         <activity
@@ -163,6 +164,8 @@ public class MainActivity extends Activity {
         settings.setDatabaseEnabled(true);
         settings.setAllowFileAccess(true);
         settings.setAllowContentAccess(true);
+        settings.setAllowFileAccessFromFileURLs(true);
+        settings.setAllowUniversalAccessFromFileURLs(true);
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
         settings.setBuiltInZoomControls(false);
@@ -172,8 +175,8 @@ public class MainActivity extends Activity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
+                // Keep local routes inside WebView
+                return false;
             }
         });
         webView.setWebChromeClient(new WebChromeClient());
@@ -229,6 +232,17 @@ if ($LASTEXITCODE -ne 0) { throw "SignApk compilation failed!" }
 
 & java -cp "$ToolsDir;$ApksigJar" SignApk $Keystore "android" "androiddebugkey" $UnsignedApk $OutApk
 if ($LASTEXITCODE -ne 0) { throw "ApkSigner failed!" }
+
+# Copy APK to frontend directory so web users can download it
+Copy-Item -Path $OutApk -Destination "$RootDir\frontend\FitBuddy.apk" -Force
+
+# Verify APK
+$VerifySrc = Join-Path $ToolsDir "VerifyApk.java"
+if (Test-Path $VerifySrc) {
+    Write-Host "`n[Verification] Verifying APK Signature Schemes..." -ForegroundColor Cyan
+    & javac -cp $ApksigJar $VerifySrc
+    & java -cp "$ToolsDir;$ApksigJar" VerifyApk $OutApk
+}
 
 Write-Host "`n==========================================================" -ForegroundColor Green
 Write-Host "       APK GENERATION SUCCESSFUL!                         " -ForegroundColor Green

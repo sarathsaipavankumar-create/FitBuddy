@@ -27,27 +27,44 @@ const DEFAULT_USER_PROFILE = {
 
 let currentProfile = { ...DEFAULT_USER_PROFILE };
 
-document.addEventListener('DOMContentLoaded', () => {
-  initUserProfilePage();
+document.addEventListener('DOMContentLoaded', async () => {
+  await initUserProfilePage();
   bindProfileFormEvents();
 });
 
 /**
  * Initializes the profile page, loading saved data and updating UI
  */
-function initUserProfilePage() {
-  loadProfileData();
+async function initUserProfilePage() {
+  await loadProfileData();
   populateProfileForm();
   updateLiveBmiPreview();
   updateProfileAvatar();
 }
 
 /**
- * Reads profile data from sessionStorage
+ * Reads profile data from backend API or local cache
  */
-function loadProfileData() {
+async function loadProfileData() {
+  if (window.FitBuddyApi && window.FitBuddyApi.isLoggedIn()) {
+    try {
+      const user = window.FitBuddyApi.getCurrentUser();
+      const res = await window.FitBuddyApi.getProfile();
+      if (res && res.data) {
+        currentProfile = {
+          ...DEFAULT_USER_PROFILE,
+          name: (user && user.fullName) || DEFAULT_USER_PROFILE.name,
+          ...res.data
+        };
+        return;
+      }
+    } catch (err) {
+      console.warn('Could not fetch profile from backend API:', err);
+    }
+  }
+
   try {
-    const raw = sessionStorage.getItem('fitbuddy_demo_profile_data');
+    const raw = sessionStorage.getItem('fitbuddy_demo_profile_data') || localStorage.getItem('fitbuddy_demo_profile_data');
     if (raw) {
       const parsed = JSON.parse(raw);
       currentProfile = { ...DEFAULT_USER_PROFILE, ...parsed };
@@ -246,11 +263,33 @@ function handleProfileSave(e) {
   currentProfile.dietPreference = dietVal;
   currentProfile.updatedAt = new Date().toISOString();
 
-  // Persist to sessionStorage (only client demographic attributes stored)
+  // Persist to storage
   try {
     sessionStorage.setItem('fitbuddy_demo_profile_data', JSON.stringify(currentProfile));
+    localStorage.setItem('fitbuddy_demo_profile_data', JSON.stringify(currentProfile));
   } catch (err) {
-    console.warn('Could not save profile to sessionStorage:', err);
+    console.warn('Could not save profile to storage:', err);
+  }
+
+  // Persist to Spring Boot & MySQL backend
+  if (window.FitBuddyApi && window.FitBuddyApi.isLoggedIn()) {
+    try {
+      await window.FitBuddyApi.updateProfile({
+        age: ageVal,
+        gender: currentProfile.gender,
+        height: heightVal,
+        weight: weightVal,
+        activityLevel: activityVal,
+        fitnessGoal: goalVal,
+        equipment: equipVal,
+        dietPreference: dietVal,
+        workoutExperience: currentProfile.workoutExperience,
+        workoutDuration: currentProfile.workoutDuration
+      });
+      await window.FitBuddyApi.logBmi({ height: heightVal, weight: weightVal });
+    } catch (err) {
+      console.warn('Backend update failed:', err);
+    }
   }
 
   // Update displays
@@ -259,7 +298,7 @@ function handleProfileSave(e) {
   updateProfileAvatar();
 
   if (typeof showToast === 'function') {
-    showToast('Profile updated! Live BMI and recommendations synced.', 'success');
+    showToast('Profile updated! Live BMI and recommendations synced with server.', 'success');
   }
 }
 

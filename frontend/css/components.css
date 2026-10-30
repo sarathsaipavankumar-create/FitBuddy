@@ -2656,7 +2656,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   19. Profile, Settings & Subscription
+   19. Profile & Settings
    -------------------------------------------------------------------------- */
 .profile-overview-card {
   background-color: #FFFFFF;
@@ -2743,67 +2743,5 @@
 body.reduce-motion * {
   animation: none !important;
   transition: none !important;
-}
-
-/* Subscription Grid */
-.sub-plan-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-xl);
-  margin-bottom: var(--space-3xl);
-  align-items: stretch;
-}
-
-.sub-plan-card {
-  background-color: #FFFFFF;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-card);
-  padding: var(--space-2xl) var(--space-xl);
-  box-shadow: var(--shadow-subtle);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  transition: all var(--transition-normal);
-}
-
-.sub-plan-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-medium);
-  box-shadow: var(--shadow-card);
-}
-
-.sub-plan-card.popular {
-  border-color: var(--forest-dark);
-  box-shadow: 0 4px 20px rgba(23, 37, 31, 0.12);
-}
-
-.sub-price-row {
-  font-family: var(--font-headings);
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: var(--forest-dark);
-  margin: var(--space-md) 0 var(--space-xs) 0;
-  line-height: 1;
-}
-
-.sub-features-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  margin: var(--space-lg) 0 var(--space-2xl) 0;
-  flex-grow: 1;
-}
-
-.sub-features-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.sub-features-list li span.check {
-  color: #15803D;
-  font-weight: 800;
 }
 

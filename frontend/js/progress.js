@@ -66,29 +66,49 @@ const INITIAL_DEMO_ENTRIES = [
   }
 ];
 
-document.addEventListener('DOMContentLoaded', () => {
-  initProgressTracker();
+document.addEventListener('DOMContentLoaded', async () => {
+  await initProgressTracker();
   bindFormEvents();
 });
 
 /**
  * Loads stored records or default demo entries and renders the UI
  */
-function initProgressTracker() {
-  loadProgressData();
+async function initProgressTracker() {
+  await loadProgressData();
   setDefaultFormDate();
   refreshProgressUI();
 }
 
 /**
- * Loads records from localStorage, or seeds with sample demo data
+ * Loads records from backend API or localStorage
  */
-function loadProgressData() {
+async function loadProgressData() {
+  if (window.FitBuddyApi && window.FitBuddyApi.isLoggedIn()) {
+    try {
+      const res = await window.FitBuddyApi.getProgressHistory();
+      if (res && res.data && Array.isArray(res.data) && res.data.length > 0) {
+        progressEntries = res.data.map(item => ({
+          id: item.id,
+          date: item.logDate,
+          weight: item.weight,
+          workoutName: item.workoutName || 'Workout Session',
+          duration: item.durationMinutes || 30,
+          isDemo: false
+        }));
+        saveProgressData();
+        return;
+      }
+    } catch (err) {
+      console.warn('Backend progress fetch deferred:', err);
+    }
+  }
+
   try {
     const raw = localStorage.getItem(PROGRESS_STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) {
+      if (Array.isArray(parsed) && parsed.length > 0) {
         progressEntries = parsed;
         return;
       }
@@ -285,8 +305,23 @@ function handleFormSubmit(e) {
   // Sort entries ascending by date
   progressEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-  // Save & Refresh
+  // Save locally
   saveProgressData();
+
+  // Save to Spring Boot backend
+  if (window.FitBuddyApi && window.FitBuddyApi.isLoggedIn()) {
+    window.FitBuddyApi.logProgress({
+      logDate: dateVal,
+      weight: weightVal !== null ? weightVal : 70.0,
+      workoutName: finalWorkout,
+      durationMinutes: finalDuration,
+      notes: 'Logged via Progress Tracker'
+    }).catch(err => {
+      console.warn('Backend progress log deferred:', err);
+    });
+  }
+
+  // Refresh UI
   refreshProgressUI();
 
   // Reset weight/duration inputs for next entry, keeping date current
