@@ -11,6 +11,7 @@ target/
 *.ear
 *.nar
 *.apk
+!frontend/FitBuddy.apk
 .build-tools/
 .apk-build/
 
